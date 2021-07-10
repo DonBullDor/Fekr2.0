@@ -5,13 +5,14 @@ namespace Service.Repository.Societes
 {
     public interface ISocietesApiRepo
     {
+        bool SaveChanges();
         IEnumerable<Societe> GetAllSocietes();
 
         Societe GetSociete(string id);
 
-        void PutSociete(string id, Societe societe);
+        void UpdateSociete(string id, Societe societe);
 
-        void PostSociete(Societe societe);
+        void CreateSociete(Societe societe);
 
         void DeleteSociete(string id);
     }

@@ -25,17 +25,25 @@ namespace Service.Repository.Enseignant
 
         public EspEnseignant GetEnseignant(string id)
         {
-            throw new NotImplementedException();
+            return _context.EspEnseignant.FirstOrDefault(p => p.IdEns == id);
         }
 
-        public void PostEnseignant(EspEnseignant enseignant)
+        public void CreateEnseignant(EspEnseignant enseignant)
+        {
+            if (enseignant == null)
+            {
+                throw new ArgumentNullException(nameof(enseignant));
+            }
+            _context.EspEnseignant.Add(enseignant);
+        }
+
+        public void UpdateEnseignant(string id, EspEnseignant enseignant)
         {
             throw new NotImplementedException();
         }
-
-        public void PutEnseignant(string id, EspEnseignant enseignant)
+        public bool SaveChanges()
         {
-            throw new NotImplementedException();
+            return (_context.SaveChanges() >= 0);
         }
     }
 }

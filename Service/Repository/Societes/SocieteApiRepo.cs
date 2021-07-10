@@ -25,17 +25,25 @@ namespace Service.Repository.Societes
 
         public Societe GetSociete(string id)
         {
-            throw new NotImplementedException();
+            return _context.Societe.FirstOrDefault(p => p.AnneeDeb == id);
         }
 
-        public void PostSociete(Societe societe)
+        public void CreateSociete(Societe societe)
+        {
+            if (societe == null)
+            {
+                throw new ArgumentNullException(nameof(societe));
+            }
+            _context.Societe.Add(societe);
+        }
+
+        public void UpdateSociete(string id, Societe societe)
         {
             throw new NotImplementedException();
         }
-
-        public void PutSociete(string id, Societe societe)
+        public bool SaveChanges()
         {
-            throw new NotImplementedException();
+            return (_context.SaveChanges() >= 0);
         }
     }
 }

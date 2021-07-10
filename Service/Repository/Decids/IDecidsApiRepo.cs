@@ -5,13 +5,15 @@ namespace Service.Repository.Decids
 {
     public interface IDecidsApiRepo
     {
+        bool SaveChanges();
+        
         IEnumerable<Decid> GetAllDecids();
 
         Decid GetDecid(string id);
 
-        void PutDecid(string id, Decid decid);
+        void UpdateDecid(string id, Decid decid);
 
-        void PostDecid(Decid decid);
+        void CreateDecid(Decid decid);
 
         void DeleteDecid(string id);
     }

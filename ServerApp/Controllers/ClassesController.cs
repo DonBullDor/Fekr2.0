@@ -1,9 +1,10 @@
-﻿using Domain.Models;
+﻿using AutoMapper;
+using Data;
+using Data.Classes;
+using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service.Repository.Classes;
 using System.Collections.Generic;
-using AutoMapper;
-using Data;
 
 namespace ServerApp.Controllers
 {
@@ -22,15 +23,15 @@ namespace ServerApp.Controllers
 
         // GET: api/ClassesApi
         [HttpGet]
-        public ActionResult<IEnumerable<ClasseDto>> GetClasse()
+        public ActionResult<IEnumerable<ClasseReadDto>> GetClasse()
         {
             var classes = _repository.GetAllClasses();
-            return Ok(_mapper.Map<IEnumerable<ClasseDto>>(classes));
+            return Ok(_mapper.Map<IEnumerable<ClasseReadDto>>(classes));
         }
 
         // GET: api/ClassesApi/5
-        [HttpGet("{id}")]
-        public ActionResult<ClasseDto> GetClasse(string id)
+        [HttpGet("{id}", Name = "GetClasse")]
+        public ActionResult<ClasseReadDto> GetClasse(string id)
         {
             var classe = _repository.GetClasse(id);
 
@@ -39,7 +40,20 @@ namespace ServerApp.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<ClasseDto>(classe));
+            return Ok(_mapper.Map<ClasseReadDto>(classe));
+        }
+
+        // POST: api/ClassesApi
+        [HttpPost]
+        public ActionResult<ClasseReadDto> CreateClasse(ClasseCreateDto classeCreateDto)
+        {
+            var classeModel = _mapper.Map<Classe>(classeCreateDto);
+            _repository.CreateClasse(classeModel);
+            _repository.SaveChanges();
+            var classeReadDto = _mapper.Map<ClasseReadDto>(classeModel);
+            return CreatedAtRoute(nameof(GetClasse),
+            new { Id = classeReadDto.CodeCl }, classeReadDto);
+
         }
 
         //// PUT: api/ClassesApi/5
@@ -71,31 +85,6 @@ namespace ServerApp.Controllers
         //    }
 
         //    return NoContent();
-        //}
-
-        //// POST: api/ClassesApi
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<Classe>> PostClasse(Classe classe)
-        //{
-        //    _context.Classe.Add(classe);
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        if (ClasseExists(classe.CodeCl))
-        //        {
-        //            return Conflict();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return CreatedAtAction("GetClasse", new { id = classe.CodeCl }, classe);
         //}
 
         //// DELETE: api/ClassesApi/5

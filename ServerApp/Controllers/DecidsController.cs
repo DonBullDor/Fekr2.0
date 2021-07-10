@@ -22,15 +22,15 @@ namespace ServerApp.Controllers
 
         // GET: api/Decids
         [HttpGet]
-        public ActionResult<IEnumerable<DecidDto>> GetDecid()
+        public ActionResult<IEnumerable<DecidReadDto>> GetDecid()
         {
             var decids = _repository.GetAllDecids();
-            return Ok(_mapper.Map<IEnumerable<DecidDto>>(decids));
+            return Ok(_mapper.Map<IEnumerable<DecidReadDto>>(decids));
         }
 
         // GET: api/Decids/5
         [HttpGet("{id}")]
-        public ActionResult<DecidDto> GetDecid(string id)
+        public ActionResult<DecidReadDto> GetDecid(string id)
         {
             var decid = _repository.GetDecid(id);
 
@@ -39,7 +39,7 @@ namespace ServerApp.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<ClasseDto>(decid));
+            return Ok(_mapper.Map<ClasseReadDto>(decid));
         }
 
         //// PUT: api/Decids/5
@@ -71,31 +71,6 @@ namespace ServerApp.Controllers
         //    }
 
         //    return NoContent();
-        //}
-
-        //// POST: api/Decids
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<Decid>> PostDecid(Decid decid)
-        //{
-        //    _context.Decid.Add(decid);
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        if (DecidExists(decid.IdDecid))
-        //        {
-        //            return Conflict();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return CreatedAtAction("GetDecid", new { id = decid.IdDecid }, decid);
         //}
 
         //// DELETE: api/Decids/5

@@ -22,22 +22,22 @@ namespace ServerApp.Controllers
 
         // GET: api/EtudiantsApi
         [HttpGet]
-        public ActionResult<IEnumerable<EtudiantDto>> GetAllEspEtudiant()
+        public ActionResult<IEnumerable<EtudiantReadDto>> GetAllEspEtudiant()
         {
-            var etudiants = _repository.GetAllEspEtudiant();
-            return Ok(_mapper.Map<IEnumerable<EtudiantDto>>(etudiants));
+            var etudiants = _repository.GetAllEtudiant();
+            return Ok(_mapper.Map<IEnumerable<EtudiantReadDto>>(etudiants));
         }
 
         // GET: api/EtudiantsApi/5
         [HttpGet("{id}")]
-        public ActionResult<EtudiantDto> GetEspEtudiant(string id)
+        public ActionResult<EtudiantReadDto> GetEspEtudiant(string id)
         {
-            var espEtudiant = _repository.GetEspEtudiant(id);
+            var espEtudiant = _repository.GetEtudiant(id);
             if (espEtudiant == null)
             {
                 return NotFound();
             }
-            return Ok(_mapper.Map<ClasseDto>(espEtudiant));
+            return Ok(_mapper.Map<ClasseReadDto>(espEtudiant));
         }
 
         //    // PUT: api/EtudiantsApi/5
@@ -69,31 +69,6 @@ namespace ServerApp.Controllers
         //        }
 
         //        return NoContent();
-        //    }
-
-        //    // POST: api/EtudiantsApi
-        //    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //    [HttpPost]
-        //    public async Task<ActionResult<EspEtudiant>> PostEspEtudiant(EspEtudiant espEtudiant)
-        //    {
-        //        _context.EspEtudiant.Add(espEtudiant);
-        //        try
-        //        {
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateException)
-        //        {
-        //            if (EspEtudiantExists(espEtudiant.IdEt))
-        //            {
-        //                return Conflict();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-
-        //        return CreatedAtAction("GetEspEtudiant", new { id = espEtudiant.IdEt }, espEtudiant);
         //    }
 
         //    // DELETE: api/EtudiantsApi/5

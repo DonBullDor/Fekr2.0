@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using Data;
+using Data.Enseignant;
 using Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ServerApp.Profiles
 {
@@ -12,7 +9,8 @@ namespace ServerApp.Profiles
     {
         public EnseignantProfile()
         {
-            CreateMap<EspEnseignant, EnseignantDto>();
+            CreateMap<EspEnseignant, EnseignantReadDto>();
+            CreateMap<EnseignantCreateDto, EspEnseignant>();
         }
     }
 }

@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using Data;
+using Data.Module;
 using Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ServerApp.Profiles
 {
@@ -12,7 +9,8 @@ namespace ServerApp.Profiles
     {
         public ModuleProfile()
         {
-            CreateMap<EspModule, ModuleDto>();
+            CreateMap<EspModule, ModuleReadDto>();
+            CreateMap<ModuleCreateDto, EspModule>();
         }
     }
 }

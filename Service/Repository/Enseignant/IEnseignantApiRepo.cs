@@ -5,13 +5,14 @@ namespace Service.Repository.Enseignant
 {
     public interface IEnseignantApiRepo
     {
+        bool SaveChanges();
         IEnumerable<EspEnseignant> GetAllEnseignants();
 
         EspEnseignant GetEnseignant(string id);
 
-        void PutEnseignant(string id, EspEnseignant enseignant);
+        void UpdateEnseignant(string id, EspEnseignant enseignant);
 
-        void PostEnseignant(EspEnseignant enseignant);
+        void CreateEnseignant(EspEnseignant enseignant);
 
         void DeleteEnseignant(string id);
     }

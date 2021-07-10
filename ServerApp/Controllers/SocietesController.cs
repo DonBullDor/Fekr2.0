@@ -22,15 +22,15 @@ namespace ServerApp.Controllers
 
         // GET: api/SocietesApi
         [HttpGet]
-        public ActionResult<IEnumerable<SocieteDto>> GetSociete()
+        public ActionResult<IEnumerable<SocieteReadDto>> GetSociete()
         {
             var scociete = _repository.GetAllSocietes();
-            return Ok(_mapper.Map<IEnumerable<SocieteDto>>(scociete));
+            return Ok(_mapper.Map<IEnumerable<SocieteReadDto>>(scociete));
         }
 
         // GET: api/SocietesApi/5
         [HttpGet("{id}")]
-        public ActionResult<SocieteDto> GetSociete(string id)
+        public ActionResult<SocieteReadDto> GetSociete(string id)
         {
             var societe = _repository.GetSociete(id);
 
@@ -39,7 +39,7 @@ namespace ServerApp.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<ClasseDto>(societe));
+            return Ok(_mapper.Map<ClasseReadDto>(societe));
         }
 
         //// PUT: api/SocietesApi/5
@@ -71,31 +71,6 @@ namespace ServerApp.Controllers
         //    }
 
         //    return NoContent();
-        //}
-
-        //// POST: api/SocietesApi
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<Societe>> PostSociete(Societe societe)
-        //{
-        //    _context.Societe.Add(societe);
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        if (SocieteExists(societe.CodeSoc))
-        //        {
-        //            return Conflict();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return CreatedAtAction("GetSociete", new { id = societe.CodeSoc }, societe);
         //}
 
         //// DELETE: api/SocietesApi/5

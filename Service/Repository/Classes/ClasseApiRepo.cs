@@ -29,17 +29,25 @@ namespace Service.Repository.Classes
 
         public Classe GetClasse(string id)
         {
-            throw new NotImplementedException();
+            return _context.Classe.FirstOrDefault(p => p.CodeCl == id);
         }
 
-        public void PostClasse(Classe espEtudiant)
+        public void CreateClasse(Classe classe)
+        {
+            if (classe == null)
+            {
+                throw new ArgumentNullException(nameof(classe));
+            }
+            _context.Classe.Add(classe);
+        }
+
+        public void UpdateClasse(string id, Classe espEtudiant)
         {
             throw new NotImplementedException();
         }
-
-        public void PutClasse(string id, Classe espEtudiant)
+        public bool SaveChanges()
         {
-            throw new NotImplementedException();
+            return (_context.SaveChanges() >= 0);
         }
     }
 }

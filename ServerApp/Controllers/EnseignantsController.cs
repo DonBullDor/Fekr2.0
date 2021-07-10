@@ -22,15 +22,15 @@ namespace ServerApp.Controllers
 
         // GET: api/Enseignants
         [HttpGet]
-        public ActionResult<IEnumerable<EnseignantDto>> GetEspEnseignant()
+        public ActionResult<IEnumerable<EnseignantReadDto>> GetEspEnseignant()
         {
             var enseignants = _repository.GetAllEnseignants();
-            return Ok(_mapper.Map<IEnumerable<EnseignantDto>>(enseignants));
+            return Ok(_mapper.Map<IEnumerable<EnseignantReadDto>>(enseignants));
         }
 
         // GET: api/Enseignants/5
         [HttpGet("{id}")]
-        public ActionResult<EnseignantDto> GetEspEnseignant(string id)
+        public ActionResult<EnseignantReadDto> GetEspEnseignant(string id)
         {
             var espEnseignant = _repository.GetEnseignant(id);
 
@@ -39,7 +39,7 @@ namespace ServerApp.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<ClasseDto>(espEnseignant));
+            return Ok(_mapper.Map<ClasseReadDto>(espEnseignant));
         }
 
         //// PUT: api/Enseignants/5
@@ -71,31 +71,6 @@ namespace ServerApp.Controllers
         //    }
 
         //    return NoContent();
-        //}
-
-        //// POST: api/Enseignants
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<EspEnseignant>> PostEspEnseignant(EspEnseignant espEnseignant)
-        //{
-        //    _context.EspEnseignant.Add(espEnseignant);
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        if (EspEnseignantExists(espEnseignant.IdEns))
-        //        {
-        //            return Conflict();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return CreatedAtAction("GetEspEnseignant", new { id = espEnseignant.IdEns }, espEnseignant);
         //}
 
         //// DELETE: api/Enseignants/5

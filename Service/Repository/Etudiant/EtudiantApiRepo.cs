@@ -15,27 +15,23 @@ namespace Service.Repository.Etudiant
             _context = context;
         }
 
-        public IEnumerable<EspEtudiant> GetAllEspEtudiant()
+        public IEnumerable<EspEtudiant> GetAllEtudiant()
         {
             return _context.EspEtudiant.ToList();
         }
 
-        public EspEtudiant GetEspEtudiant(string id)
+        public EspEtudiant GetEtudiant(string id)
         {
-            var espEtudiant = _context.EspEtudiant.Find(id);
-
-            if (espEtudiant == null)
-            {
-                return null;
-            }
-
-            return espEtudiant;
+            return _context.EspEtudiant.FirstOrDefault(p => p.IdEt == id);
         }
 
-        public void PostEspEtudiant(EspEtudiant espEtudiant)
+        public void CreateEtudiant(EspEtudiant etudiant)
         {
-            _context.EspEtudiant.Add(espEtudiant);
-            _context.SaveChanges();
+            if (etudiant == null)
+            {
+                throw new ArgumentNullException(nameof(etudiant));
+            }
+            _context.EspEtudiant.Add(etudiant);
         }
 
         private bool EspEtudiantExists(string id)
@@ -43,15 +39,19 @@ namespace Service.Repository.Etudiant
             return _context.EspEtudiant.Any(e => e.IdEt == id);
         }
 
-        public void PutEspEtudiant(string id, EspEtudiant espEtudiant)
+        public void UpdateEtudiant(string id, EspEtudiant espEtudiant)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteEspEtudiant(string id)
+        public void DeleteEtudiant(string id)
         {
             _context.EspEtudiant.Remove(new EspEtudiant() { IdEt = id });
             _context.SaveChanges();
+        }
+        public bool SaveChanges()
+        {
+            return (_context.SaveChanges() >= 0);
         }
     }
 }

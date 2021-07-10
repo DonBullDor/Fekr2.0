@@ -30,14 +30,18 @@ namespace Service.Repository.Modules
             throw new NotImplementedException();
         }
 
-        public void PostModule(EspModule espModule)
+        public void CreateModule(EspModule espModule)
         {
             throw new NotImplementedException();
         }
 
-        public void PutModule(string id, EspModule espModule)
+        public void UpdateModule(string id, EspModule espModule)
         {
             throw new NotImplementedException();
+        }
+        public bool SaveChanges()
+        {
+            return (_context.SaveChanges() >= 0);
         }
     }
 }

@@ -5,13 +5,14 @@ namespace Service.Repository.Classes
 {
     public interface IClassesApiRepo
     {
+        bool SaveChanges();
         IEnumerable<Classe> GetAllClasses();
 
         Classe GetClasse(string id);
 
-        void PutClasse(string id, Classe espEtudiant);
+        void UpdateClasse(string id, Classe classe);
 
-        void PostClasse(Classe espEtudiant);
+        void CreateClasse(Classe classe);
 
         void DeleteClasse(string id);
     }

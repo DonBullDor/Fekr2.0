@@ -22,15 +22,15 @@ namespace ServerApp.Controllers
 
         // GET: api/ModulesApi
         [HttpGet]
-        public ActionResult<IEnumerable<ModuleDto>> GetEspModule()
+        public ActionResult<IEnumerable<ModuleReadDto>> GetEspModule()
         {
             var modules = _repository.GetAllModules();
-            return Ok(_mapper.Map<IEnumerable<ModuleDto>>(modules));
+            return Ok(_mapper.Map<IEnumerable<ModuleReadDto>>(modules));
         }
 
         // GET: api/ModulesApi/5
         [HttpGet("{id}")]
-        public ActionResult<ModuleDto> GetEspModule(string id)
+        public ActionResult<ModuleReadDto> GetEspModule(string id)
         {
             var espModule = _repository.GetModule(id);
 
@@ -39,7 +39,7 @@ namespace ServerApp.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<ClasseDto>(espModule));
+            return Ok(_mapper.Map<ClasseReadDto>(espModule));
         }
 
         //// PUT: api/ModulesApi/5
@@ -73,30 +73,6 @@ namespace ServerApp.Controllers
         //    return NoContent();
         //}
 
-        //// POST: api/ModulesApi
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<EspModule>> PostEspModule(EspModule espModule)
-        //{
-        //    _context.EspModule.Add(espModule);
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        if (EspModuleExists(espModule.CodeModule))
-        //        {
-        //            return Conflict();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return CreatedAtAction("GetEspModule", new { id = espModule.CodeModule }, espModule);
-        //}
 
         //// DELETE: api/ModulesApi/5
         //[HttpDelete("{id}")]

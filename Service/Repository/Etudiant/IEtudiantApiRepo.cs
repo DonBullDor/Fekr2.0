@@ -5,14 +5,15 @@ namespace Service.Repository
 {
     public interface IEtudiantApiRepo
     {
-        IEnumerable<EspEtudiant> GetAllEspEtudiant();
+        bool SaveChanges();
+        IEnumerable<EspEtudiant> GetAllEtudiant();
 
-        EspEtudiant GetEspEtudiant(string id);
+        EspEtudiant GetEtudiant(string id);
 
-        void PutEspEtudiant(string id, EspEtudiant espEtudiant);
+        void UpdateEtudiant(string id, EspEtudiant espEtudiant);
 
-        void PostEspEtudiant(EspEtudiant espEtudiant);
+        void CreateEtudiant(EspEtudiant espEtudiant);
 
-        void DeleteEspEtudiant(string id);
+        void DeleteEtudiant(string id);
     }
 }
