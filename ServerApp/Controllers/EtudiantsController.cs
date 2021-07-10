@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Data;
+using Data.Etudiant;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service.Repository;
@@ -40,6 +41,19 @@ namespace ServerApp.Controllers
             return Ok(_mapper.Map<ClasseReadDto>(espEtudiant));
         }
 
+        [HttpPut("{id}")]
+        public ActionResult UpdateEtudiant(string id, EtudiantUpdateDto etudiantUpdateDto)
+        {
+            var etudiantModelFromRepo = _repository.GetEtudiant(id);
+            if (etudiantModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(etudiantUpdateDto, etudiantModelFromRepo);
+            _repository.UpdateEtudiant(etudiantModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
         //    // PUT: api/EtudiantsApi/5
         //    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //    [HttpPut("{id}")]

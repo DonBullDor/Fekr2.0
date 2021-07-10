@@ -10,7 +10,7 @@ namespace Service.Repository.Societes
 
         Societe GetSociete(string id);
 
-        void UpdateSociete(string id, Societe societe);
+        void UpdateSociete(Societe societe);
 
         void CreateSociete(Societe societe);
 

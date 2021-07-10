@@ -39,9 +39,8 @@ namespace Service.Repository.Decids
             _context.Decid.Add(decid);
         }
 
-        public void UpdateDecid(string id, Decid decid)
+        public void UpdateDecid(Decid decid)
         {
-            throw new NotImplementedException();
         }
 
         public bool SaveChanges()

@@ -41,9 +41,8 @@ namespace Service.Repository.Classes
             _context.Classe.Add(classe);
         }
 
-        public void UpdateClasse(string id, Classe espEtudiant)
+        public void UpdateClasse(Classe espEtudiant)
         {
-            throw new NotImplementedException();
         }
         public bool SaveChanges()
         {

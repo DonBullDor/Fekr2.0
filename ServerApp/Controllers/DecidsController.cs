@@ -53,6 +53,20 @@ namespace ServerApp.Controllers
             return CreatedAtRoute(nameof(GetDecid),
             new { Id = decidReadDto.IdDecid }, decidReadDto);
         }
+
+        [HttpPut("{id}")]
+        public ActionResult UpdateDecid(string id, DecidUpdateDto decidUpdateDto)
+        {
+            var decidModelFromRepo = _repository.GetDecid(id);
+            if (decidModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(decidUpdateDto, decidModelFromRepo);
+            _repository.UpdateDecid(decidModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
         //// PUT: api/Decids/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //[HttpPut("{id}")]

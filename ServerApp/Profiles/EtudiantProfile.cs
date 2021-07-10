@@ -11,6 +11,7 @@ namespace ServerApp.Profiles
         {
             CreateMap<EspEtudiant, EtudiantReadDto>();
             CreateMap<EtudiantCreateDto, EspEtudiant>();
+            CreateMap<EtudiantUpdateDto, EspEtudiant>();
         }
     }
 }

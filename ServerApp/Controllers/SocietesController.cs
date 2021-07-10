@@ -54,6 +54,20 @@ namespace ServerApp.Controllers
             new { Id = societeReadDto.AnneeDeb }, societeReadDto);
         }
 
+        [HttpPut("{id}")]
+        public ActionResult UpdateSociete(string id, SocieteUpdateDto societeUpdateDto)
+        {
+            var societeModelFromRepo = _repository.GetSociete(id);
+            if (societeModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(societeUpdateDto, societeModelFromRepo);
+            _repository.UpdateSociete(societeModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
+
         //// PUT: api/SocietesApi/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //[HttpPut("{id}")]

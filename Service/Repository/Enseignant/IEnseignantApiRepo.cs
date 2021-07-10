@@ -10,7 +10,7 @@ namespace Service.Repository.Enseignant
 
         EspEnseignant GetEnseignant(string id);
 
-        void UpdateEnseignant(string id, EspEnseignant enseignant);
+        void UpdateEnseignant(EspEnseignant enseignant);
 
         void CreateEnseignant(EspEnseignant enseignant);
 

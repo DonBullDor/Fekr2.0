@@ -10,7 +10,7 @@ namespace Service.Repository.Classes
 
         Classe GetClasse(string id);
 
-        void UpdateClasse(string id, Classe classe);
+        void UpdateClasse(Classe classe);
 
         void CreateClasse(Classe classe);
 

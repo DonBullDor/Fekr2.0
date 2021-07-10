@@ -39,9 +39,8 @@ namespace Service.Repository.Etudiant
             return _context.EspEtudiant.Any(e => e.IdEt == id);
         }
 
-        public void UpdateEtudiant(string id, EspEtudiant espEtudiant)
+        public void UpdateEtudiant(EspEtudiant espEtudiant)
         {
-            throw new NotImplementedException();
         }
 
         public void DeleteEtudiant(string id)

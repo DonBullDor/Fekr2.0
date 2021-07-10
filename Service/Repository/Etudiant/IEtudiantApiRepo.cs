@@ -10,7 +10,7 @@ namespace Service.Repository
 
         EspEtudiant GetEtudiant(string id);
 
-        void UpdateEtudiant(string id, EspEtudiant espEtudiant);
+        void UpdateEtudiant(EspEtudiant espEtudiant);
 
         void CreateEtudiant(EspEtudiant espEtudiant);
 

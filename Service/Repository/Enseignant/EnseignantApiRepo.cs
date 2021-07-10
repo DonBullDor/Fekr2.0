@@ -37,9 +37,8 @@ namespace Service.Repository.Enseignant
             _context.EspEnseignant.Add(enseignant);
         }
 
-        public void UpdateEnseignant(string id, EspEnseignant enseignant)
+        public void UpdateEnseignant(EspEnseignant enseignant)
         {
-            throw new NotImplementedException();
         }
         public bool SaveChanges()
         {

@@ -37,9 +37,8 @@ namespace Service.Repository.Societes
             _context.Societe.Add(societe);
         }
 
-        public void UpdateSociete(string id, Societe societe)
+        public void UpdateSociete(Societe societe)
         {
-            throw new NotImplementedException();
         }
         public bool SaveChanges()
         {

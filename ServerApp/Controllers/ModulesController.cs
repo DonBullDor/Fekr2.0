@@ -54,6 +54,19 @@ namespace ServerApp.Controllers
             new { Id = moduleReadDto.CodeCl }, moduleReadDto);
         }
 
+        [HttpPut("{id}")]
+        public ActionResult UpdateModule(string id, ModuleUpdateDto moduleUpdateDto)
+        {
+            var moduleModelFromRepo = _repository.GetModule(id);
+            if (moduleModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(moduleUpdateDto, moduleModelFromRepo);
+            _repository.UpdateModule(moduleModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
         //// PUT: api/ModulesApi/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //[HttpPut("{id}")]

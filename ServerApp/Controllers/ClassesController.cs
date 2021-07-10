@@ -56,6 +56,20 @@ namespace ServerApp.Controllers
 
         }
 
+        [HttpPut("{id}")]
+        public ActionResult UpdateClasse(string id, ClasseUpdateDto classeUpdateDto)
+        {
+            var classeModelFromRepo = _repository.GetClasse(id);
+            if (classeModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(classeUpdateDto, classeModelFromRepo);
+            _repository.UpdateClasse(classeModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
+
         //// PUT: api/ClassesApi/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //[HttpPut("{id}")]

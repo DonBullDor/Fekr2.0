@@ -10,7 +10,7 @@ namespace Service.Repository.Modules
 
         EspModule GetModule(string id);
 
-        void UpdateModule(string id, EspModule espModule);
+        void UpdateModule(EspModule espModule);
 
         void CreateModule(EspModule espModule);
 

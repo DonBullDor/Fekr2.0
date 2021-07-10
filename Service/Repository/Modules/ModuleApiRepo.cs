@@ -35,9 +35,8 @@ namespace Service.Repository.Modules
             throw new NotImplementedException();
         }
 
-        public void UpdateModule(string id, EspModule espModule)
+        public void UpdateModule(EspModule espModule)
         {
-            throw new NotImplementedException();
         }
         public bool SaveChanges()
         {

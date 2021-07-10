@@ -54,6 +54,19 @@ namespace ServerApp.Controllers
             new { Id = enseignantReadDto.IdEns }, enseignantReadDto);
         }
 
+        [HttpPut("{id}")]
+        public ActionResult UpdateEnseignant(string id, EnseignantUpdateDto enseignantUpdateDto)
+        {
+            var enseignantModelFromRepo = _repository.GetEnseignant(id);
+            if (enseignantModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(enseignantUpdateDto, enseignantModelFromRepo);
+            _repository.UpdateEnseignant(enseignantModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
         //// PUT: api/Enseignants/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //[HttpPut("{id}")]

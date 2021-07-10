@@ -11,7 +11,7 @@ namespace Service.Repository.Decids
 
         Decid GetDecid(string id);
 
-        void UpdateDecid(string id, Decid decid);
+        void UpdateDecid(Decid decid);
 
         void CreateDecid(Decid decid);
 
