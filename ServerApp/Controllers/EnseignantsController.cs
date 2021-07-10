@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Data;
+using Data.Enseignant;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service.Repository.Enseignant;
@@ -29,8 +30,8 @@ namespace ServerApp.Controllers
         }
 
         // GET: api/Enseignants/5
-        [HttpGet("{id}")]
-        public ActionResult<EnseignantReadDto> GetEspEnseignant(string id)
+        [HttpGet("{id}", Name = "GetEnseignant")]
+        public ActionResult<EnseignantReadDto> GetEnseignant(string id)
         {
             var espEnseignant = _repository.GetEnseignant(id);
 
@@ -39,7 +40,18 @@ namespace ServerApp.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<ClasseReadDto>(espEnseignant));
+            return Ok(_mapper.Map<EnseignantReadDto>(espEnseignant));
+        }
+
+        [HttpPost]
+        public ActionResult<EnseignantReadDto> CreateEnseignant(EnseignantCreateDto enseignantCreateDto)
+        {
+            var enseignantModel = _mapper.Map<EspEnseignant>(enseignantCreateDto);
+            _repository.CreateEnseignant(enseignantModel);
+            _repository.SaveChanges();
+            var enseignantReadDto = _mapper.Map<EnseignantReadDto>(enseignantModel);
+            return CreatedAtRoute(nameof(GetEnseignant),
+            new { Id = enseignantReadDto.IdEns }, enseignantReadDto);
         }
 
         //// PUT: api/Enseignants/5

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Data;
+using Data.Decids;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service.Repository.Decids;
@@ -29,7 +30,7 @@ namespace ServerApp.Controllers
         }
 
         // GET: api/Decids/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetDecid")]
         public ActionResult<DecidReadDto> GetDecid(string id)
         {
             var decid = _repository.GetDecid(id);
@@ -39,9 +40,19 @@ namespace ServerApp.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<ClasseReadDto>(decid));
+            return Ok(_mapper.Map<DecidReadDto>(decid));
         }
 
+        [HttpPost]
+        public ActionResult<DecidReadDto> CreateDecid(DecidCreateDto decidCreateDto)
+        {
+            var decidModel = _mapper.Map<Decid>(decidCreateDto);
+            _repository.CreateDecid(decidModel);
+            _repository.SaveChanges();
+            var decidReadDto = _mapper.Map<DecidReadDto>(decidModel);
+            return CreatedAtRoute(nameof(GetDecid),
+            new { Id = decidReadDto.IdDecid }, decidReadDto);
+        }
         //// PUT: api/Decids/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //[HttpPut("{id}")]

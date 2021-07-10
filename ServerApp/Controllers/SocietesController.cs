@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Data;
+using Data.Societes;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service.Repository.Societes;
@@ -29,7 +30,7 @@ namespace ServerApp.Controllers
         }
 
         // GET: api/SocietesApi/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetSociete")]
         public ActionResult<SocieteReadDto> GetSociete(string id)
         {
             var societe = _repository.GetSociete(id);
@@ -39,7 +40,18 @@ namespace ServerApp.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<ClasseReadDto>(societe));
+            return Ok(_mapper.Map<SocieteReadDto>(societe));
+        }
+
+        [HttpPost]
+        public ActionResult<SocieteReadDto> CreateSociete(SocieteCreateDto societeCreateDto)
+        {
+            var societeModel = _mapper.Map<Societe>(societeCreateDto);
+            _repository.CreateSociete(societeModel);
+            _repository.SaveChanges();
+            var societeReadDto = _mapper.Map<SocieteReadDto>(societeModel);
+            return CreatedAtRoute(nameof(GetSociete),
+            new { Id = societeReadDto.AnneeDeb }, societeReadDto);
         }
 
         //// PUT: api/SocietesApi/5

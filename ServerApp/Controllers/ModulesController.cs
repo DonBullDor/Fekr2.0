@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Data;
+using Data.Module;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service.Repository.Modules;
@@ -29,8 +30,8 @@ namespace ServerApp.Controllers
         }
 
         // GET: api/ModulesApi/5
-        [HttpGet("{id}")]
-        public ActionResult<ModuleReadDto> GetEspModule(string id)
+        [HttpGet("{id}", Name = "GetModule")]
+        public ActionResult<ModuleReadDto> GetModule(string id)
         {
             var espModule = _repository.GetModule(id);
 
@@ -39,7 +40,18 @@ namespace ServerApp.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<ClasseReadDto>(espModule));
+            return Ok(_mapper.Map<ModuleReadDto>(espModule));
+        }
+
+        [HttpPost]
+        public ActionResult<ModuleReadDto> CreateModule(ModuleCreateDto moduleCreateDto)
+        {
+            var moduleModel = _mapper.Map<EspModule>(moduleCreateDto);
+            _repository.CreateModule(moduleModel);
+            _repository.SaveChanges();
+            var moduleReadDto = _mapper.Map<ClasseReadDto>(moduleModel);
+            return CreatedAtRoute(nameof(GetModule),
+            new { Id = moduleReadDto.CodeCl }, moduleReadDto);
         }
 
         //// PUT: api/ModulesApi/5
