@@ -13,9 +13,13 @@ namespace Service.Repository.Enseignant
         {
             _context = context;
         }
-        public void DeleteEnseignant(string id)
+        public void DeleteEnseignant(EspEnseignant enseignant)
         {
-            throw new NotImplementedException();
+            if (enseignant == null)
+            {
+                throw new ArgumentNullException(nameof(enseignant));
+            }
+            _context.EspEnseignant.Remove(enseignant);
         }
 
         public IEnumerable<EspEnseignant> GetAllEnseignants()

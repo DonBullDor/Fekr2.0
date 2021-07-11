@@ -14,6 +14,6 @@ namespace Service.Repository.Modules
 
         void CreateModule(EspModule espModule);
 
-        void DeleteModule(string id);
+        void DeleteModule(EspModule module);
     }
 }

@@ -14,6 +14,6 @@ namespace Service.Repository.Enseignant
 
         void CreateEnseignant(EspEnseignant enseignant);
 
-        void DeleteEnseignant(string id);
+        void DeleteEnseignant(EspEnseignant enseignant);
     }
 }

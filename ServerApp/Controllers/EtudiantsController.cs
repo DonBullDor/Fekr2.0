@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Data;
 using Data.Etudiant;
-using Domain.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Service.Repository;
 using System.Collections.Generic;
@@ -54,56 +54,39 @@ namespace ServerApp.Controllers
             _repository.SaveChanges();
             return NoContent();
         }
-        //    // PUT: api/EtudiantsApi/5
-        //    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //    [HttpPut("{id}")]
-        //    public async Task<IActionResult> PutEspEtudiant(string id, EspEtudiant espEtudiant)
-        //    {
-        //        if (id != espEtudiant.IdEt)
-        //        {
-        //            return BadRequest();
-        //        }
 
-        //        _context.Entry(espEtudiant).State = EntityState.Modified;
+        [HttpPatch("{id}")]
+        public ActionResult PartialEtudiantUpdate(string id, JsonPatchDocument<EtudiantUpdateDto> patchDoc)
+        {
+            var etudiantModelFromRepo = _repository.GetEtudiant(id);
+            if (etudiantModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            var etudiantToPatch = _mapper.Map<EtudiantUpdateDto>(etudiantModelFromRepo);
+            patchDoc.ApplyTo(etudiantToPatch, ModelState);
+            if (!TryValidateModel(etudiantToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+            _mapper.Map(etudiantToPatch, etudiantModelFromRepo);
+            _repository.UpdateEtudiant(etudiantModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
 
-        //        try
-        //        {
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!EspEtudiantExists(id))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
 
-        //        return NoContent();
-        //    }
-
-        //    // DELETE: api/EtudiantsApi/5
-        //    [HttpDelete("{id}")]
-        //    public async Task<IActionResult> DeleteEspEtudiant(string id)
-        //    {
-        //        var espEtudiant = await _context.EspEtudiant.FindAsync(id);
-        //        if (espEtudiant == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        _context.EspEtudiant.Remove(espEtudiant);
-        //        await _context.SaveChangesAsync();
-
-        //        return NoContent();
-        //    }
-
-        //    private bool EspEtudiantExists(string id)
-        //    {
-        //        return _context.EspEtudiant.Any(e => e.IdEt == id);
-        //    }
+        [HttpDelete("{id}")]
+        public ActionResult DeleteEtudiant(string id)
+        {
+            var etudiantModelFromRepo = _repository.GetEtudiant(id);
+            if (etudiantModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            _repository.DeleteEtudiant(etudiantModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
     }
 }

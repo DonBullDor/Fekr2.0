@@ -34,19 +34,17 @@ namespace Service.Repository.Etudiant
             _context.EspEtudiant.Add(etudiant);
         }
 
-        private bool EspEtudiantExists(string id)
-        {
-            return _context.EspEtudiant.Any(e => e.IdEt == id);
-        }
-
         public void UpdateEtudiant(EspEtudiant espEtudiant)
         {
         }
 
-        public void DeleteEtudiant(string id)
+        public void DeleteEtudiant(EspEtudiant etudiant)
         {
-            _context.EspEtudiant.Remove(new EspEtudiant() { IdEt = id });
-            _context.SaveChanges();
+            if (etudiant == null)
+            {
+                throw new ArgumentNullException(nameof(etudiant));
+            }
+            _context.EspEtudiant.Remove(etudiant);
         }
         public bool SaveChanges()
         {

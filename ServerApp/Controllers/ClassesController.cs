@@ -5,6 +5,7 @@ using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service.Repository.Classes;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace ServerApp.Controllers
 {
@@ -70,56 +71,37 @@ namespace ServerApp.Controllers
             return NoContent();
         }
 
-        //// PUT: api/ClassesApi/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutClasse(string id, Classe classe)
-        //{
-        //    if (id != classe.CodeCl)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPatch("{id}")]
+        public ActionResult PartialClasseUpdate(string id, JsonPatchDocument<ClasseUpdateDto> patchDoc)
+        {
+            var classeModelFromRepo = _repository.GetClasse(id);
+            if (classeModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            var classeToPatch = _mapper.Map<ClasseUpdateDto>(classeModelFromRepo);
+            patchDoc.ApplyTo(classeToPatch, ModelState);
+            if (!TryValidateModel(classeToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+            _mapper.Map(classeToPatch, classeModelFromRepo);
+            _repository.UpdateClasse(classeModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
 
-        //    _context.Entry(classe).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!ClasseExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
-
-        //// DELETE: api/ClassesApi/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteClasse(string id)
-        //{
-        //    var classe = await _context.Classe.FindAsync(id);
-        //    if (classe == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.Classe.Remove(classe);
-        //    await _context.SaveChangesAsync();
-
-        //    return NoContent();
-        //}
-
-        //private bool ClasseExists(string id)
-        //{
-        //    return _context.Classe.Any(e => e.CodeCl == id);
-        //}
+        [HttpDelete("{id}")]
+        public ActionResult DeleteClasse(string id)
+        {
+            var decidModelFromRepo = _repository.GetClasse(id);
+            if (decidModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            _repository.DeleteClasse(decidModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
     }
 }

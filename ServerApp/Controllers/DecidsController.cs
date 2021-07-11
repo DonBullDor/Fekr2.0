@@ -5,6 +5,7 @@ using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service.Repository.Decids;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace ServerApp.Controllers
 {
@@ -67,56 +68,38 @@ namespace ServerApp.Controllers
             _repository.SaveChanges();
             return NoContent();
         }
-        //// PUT: api/Decids/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutDecid(string id, Decid decid)
-        //{
-        //    if (id != decid.IdDecid)
-        //    {
-        //        return BadRequest();
-        //    }
 
-        //    _context.Entry(decid).State = EntityState.Modified;
+        [HttpPatch("{id}")]
+        public ActionResult PartialDecidUpdate(string id, JsonPatchDocument<DecidUpdateDto> patchDoc)
+        {
+            var decidModelFromRepo = _repository.GetDecid(id);
+            if (decidModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            var decidToPatch = _mapper.Map<DecidUpdateDto>(decidModelFromRepo);
+            patchDoc.ApplyTo(decidToPatch, ModelState);
+            if (!TryValidateModel(decidToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+            _mapper.Map(decidToPatch, decidModelFromRepo);
+            _repository.UpdateDecid(decidModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!DecidExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
-
-        //// DELETE: api/Decids/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteDecid(string id)
-        //{
-        //    var decid = await _context.Decid.FindAsync(id);
-        //    if (decid == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.Decid.Remove(decid);
-        //    await _context.SaveChangesAsync();
-
-        //    return NoContent();
-        //}
-
-        //private bool DecidExists(string id)
-        //{
-        //    return _context.Decid.Any(e => e.IdDecid == id);
-        //}
+        [HttpDelete("{id}")]
+        public ActionResult DeleteDecid(string id)
+        {
+            var decidModelFromRepo = _repository.GetDecid(id);
+            if (decidModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            _repository.DeleteDecid(decidModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
     }
 }

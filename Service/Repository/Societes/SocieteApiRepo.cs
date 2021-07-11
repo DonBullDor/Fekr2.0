@@ -13,9 +13,13 @@ namespace Service.Repository.Societes
         {
             _context = context;
         }
-        public void DeleteSociete(string id)
+        public void DeleteSociete(Societe societe)
         {
-            throw new NotImplementedException();
+            if (societe == null)
+            {
+                throw new ArgumentNullException(nameof(societe));
+            }
+            _context.Societe.Remove(societe);
         }
 
         public IEnumerable<Societe> GetAllSocietes()

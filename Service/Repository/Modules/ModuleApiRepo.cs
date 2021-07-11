@@ -15,9 +15,13 @@ namespace Service.Repository.Modules
             _context = context;
         }
 
-        public void DeleteModule(string id)
+        public void DeleteModule(EspModule module)
         {
-            throw new NotImplementedException();
+            if (module == null)
+            {
+                throw new ArgumentNullException(nameof(module));
+            }
+            _context.EspModule.Remove(module);
         }
 
         public IEnumerable<EspModule> GetAllModules()

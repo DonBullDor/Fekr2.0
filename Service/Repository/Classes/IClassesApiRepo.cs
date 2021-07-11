@@ -14,6 +14,6 @@ namespace Service.Repository.Classes
 
         void CreateClasse(Classe classe);
 
-        void DeleteClasse(string id);
+        void DeleteClasse(Classe classe);
     }
 }

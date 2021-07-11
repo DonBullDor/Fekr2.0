@@ -1,25 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
-using Domain.Models;
-using Microsoft.EntityFrameworkCore;
-using Data;
-using Service.Repository.Etudiant;
+using Newtonsoft.Json.Serialization;
 using Service.Repository;
 using Service.Repository.Classes;
-using Service.Repository.Modules;
 using Service.Repository.Decids;
-using Service.Repository.Societes;
 using Service.Repository.Enseignant;
-using AutoMapper;
+using Service.Repository.Etudiant;
+using Service.Repository.Modules;
+using Service.Repository.Societes;
+using System;
 
 namespace ServerApp
 {
@@ -32,7 +27,6 @@ namespace ServerApp
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
@@ -47,9 +41,14 @@ namespace ServerApp
             services.AddScoped<IDecidsApiRepo, DecidsApiRepo>();
             services.AddScoped<ISocietesApiRepo, SocieteApiRepo>();
             services.AddScoped<IEnseignantApiRepo, EnseignantApiRepo>();
+
+            services.AddControllers().AddNewtonsoftJson(option =>
+            {
+                option.SerializerSettings.ContractResolver = new
+                CamelCasePropertyNamesContractResolver();
+            });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -59,7 +58,6 @@ namespace ServerApp
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -76,7 +74,8 @@ namespace ServerApp
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.UseSpa(spa => {
+            app.UseSpa(spa =>
+            {
                 spa.Options.SourcePath = "../ClientApp";
                 spa.UseAngularCliServer("start");
             });

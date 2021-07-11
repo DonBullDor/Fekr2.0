@@ -12,6 +12,7 @@ namespace ServerApp.Profiles
             CreateMap<EspEnseignant, EnseignantReadDto>();
             CreateMap<EnseignantCreateDto, EspEnseignant>();
             CreateMap<EnseignantUpdateDto, EspEnseignant>();
+            CreateMap<EspEnseignant, EnseignantUpdateDto>();
         }
     }
 }

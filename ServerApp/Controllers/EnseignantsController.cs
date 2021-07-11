@@ -5,6 +5,7 @@ using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service.Repository.Enseignant;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace ServerApp.Controllers
 {
@@ -67,56 +68,38 @@ namespace ServerApp.Controllers
             _repository.SaveChanges();
             return NoContent();
         }
-        //// PUT: api/Enseignants/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutEspEnseignant(string id, EspEnseignant espEnseignant)
-        //{
-        //    if (id != espEnseignant.IdEns)
-        //    {
-        //        return BadRequest();
-        //    }
 
-        //    _context.Entry(espEnseignant).State = EntityState.Modified;
+        [HttpPatch("{id}")]
+        public ActionResult PartialEnseignantUpdate(string id, JsonPatchDocument<EnseignantUpdateDto> patchDoc)
+        {
+            var enseignantModelFromRepo = _repository.GetEnseignant(id);
+            if (enseignantModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            var enseignantToPatch = _mapper.Map<EnseignantUpdateDto>(enseignantModelFromRepo);
+            patchDoc.ApplyTo(enseignantToPatch, ModelState);
+            if (!TryValidateModel(enseignantToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+            _mapper.Map(enseignantToPatch, enseignantModelFromRepo);
+            _repository.UpdateEnseignant(enseignantModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!EspEnseignantExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
-
-        //// DELETE: api/Enseignants/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteEspEnseignant(string id)
-        //{
-        //    var espEnseignant = await _context.EspEnseignant.FindAsync(id);
-        //    if (espEnseignant == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.EspEnseignant.Remove(espEnseignant);
-        //    await _context.SaveChangesAsync();
-
-        //    return NoContent();
-        //}
-
-        //private bool EspEnseignantExists(string id)
-        //{
-        //    return _context.EspEnseignant.Any(e => e.IdEns == id);
-        //}
+        [HttpDelete("{id}")]
+        public ActionResult DeleteEnseignant(string id)
+        {
+            var enseignantModelFromRepo = _repository.GetEnseignant(id);
+            if (enseignantModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            _repository.DeleteEnseignant(enseignantModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
     }
 }

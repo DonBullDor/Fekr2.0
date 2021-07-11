@@ -14,6 +14,6 @@ namespace Service.Repository.Societes
 
         void CreateSociete(Societe societe);
 
-        void DeleteSociete(string id);
+        void DeleteSociete(Societe societe);
     }
 }

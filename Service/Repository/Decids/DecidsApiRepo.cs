@@ -15,9 +15,13 @@ namespace Service.Repository.Decids
             _context = context;
         }
 
-        public void DeleteDecid(string id)
+        public void DeleteDecid(Decid decid)
         {
-            throw new NotImplementedException();
+            if (decid == null)
+            {
+                throw new ArgumentNullException(nameof(decid));
+            }
+            _context.Decid.Remove(decid);
         }
 
         public IEnumerable<Decid> GetAllDecids()

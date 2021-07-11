@@ -12,6 +12,7 @@ namespace ServerApp.Profiles
             CreateMap<EspModule, ModuleReadDto>();
             CreateMap<ModuleCreateDto, EspModule>();
             CreateMap<ModuleUpdateDto, EspModule>();
+            CreateMap<EspModule, ModuleUpdateDto>();
         }
     }
 }

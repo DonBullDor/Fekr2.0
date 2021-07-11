@@ -5,6 +5,7 @@ using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service.Repository.Societes;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace ServerApp.Controllers
 {
@@ -68,56 +69,38 @@ namespace ServerApp.Controllers
             return NoContent();
         }
 
-        //// PUT: api/SocietesApi/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutSociete(string id, Societe societe)
-        //{
-        //    if (id != societe.CodeSoc)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPatch("{id}")]
+        public ActionResult PartialSocieteUpdate(string id, JsonPatchDocument<SocieteUpdateDto> patchDoc)
+        {
+            var societeModelFromRepo = _repository.GetSociete(id);
+            if (societeModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            var societeToPatch = _mapper.Map<SocieteUpdateDto>(societeModelFromRepo);
+            patchDoc.ApplyTo(societeToPatch, ModelState);
+            if (!TryValidateModel(societeToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+            _mapper.Map(societeToPatch, societeModelFromRepo);
+            _repository.UpdateSociete(societeModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
 
-        //    _context.Entry(societe).State = EntityState.Modified;
+        [HttpDelete("{id}")]
+        public ActionResult DeleteSociete(string id)
+        {
+            var societeModelFromRepo = _repository.GetSociete(id);
+            if (societeModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            _repository.DeleteSociete(societeModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!SocieteExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
-
-        //// DELETE: api/SocietesApi/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteSociete(string id)
-        //{
-        //    var societe = await _context.Societe.FindAsync(id);
-        //    if (societe == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.Societe.Remove(societe);
-        //    await _context.SaveChangesAsync();
-
-        //    return NoContent();
-        //}
-
-        //private bool SocieteExists(string id)
-        //{
-        //    return _context.Societe.Any(e => e.CodeSoc == id);
-        //}
     }
 }

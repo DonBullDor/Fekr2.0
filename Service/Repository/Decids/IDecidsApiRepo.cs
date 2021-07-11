@@ -15,6 +15,6 @@ namespace Service.Repository.Decids
 
         void CreateDecid(Decid decid);
 
-        void DeleteDecid(string id);
+        void DeleteDecid(Decid decid);
     }
 }

@@ -12,6 +12,7 @@ namespace ServerApp.Profiles
             CreateMap<Decid, DecidReadDto>();
             CreateMap<DecidCreateDto, Decid>();
             CreateMap<DecidUpdateDto, Decid>();
+            CreateMap<Decid, DecidUpdateDto>();
         }
     }
 }

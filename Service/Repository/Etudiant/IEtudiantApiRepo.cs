@@ -14,6 +14,6 @@ namespace Service.Repository
 
         void CreateEtudiant(EspEtudiant espEtudiant);
 
-        void DeleteEtudiant(string id);
+        void DeleteEtudiant(EspEtudiant etudiant);
     }
 }

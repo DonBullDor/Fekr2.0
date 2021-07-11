@@ -17,9 +17,13 @@ namespace Service.Repository.Classes
         {
             _context = context;
         }
-        public void DeleteClasse(string id)
+        public void DeleteClasse(Classe classe)
         {
-            throw new NotImplementedException();
+            if (classe == null)
+            {
+                throw new ArgumentNullException(nameof(classe));
+            }
+            _context.Classe.Remove(classe);
         }
 
         public IEnumerable<Classe> GetAllClasses()

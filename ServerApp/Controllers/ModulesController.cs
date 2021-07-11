@@ -67,57 +67,18 @@ namespace ServerApp.Controllers
             _repository.SaveChanges();
             return NoContent();
         }
-        //// PUT: api/ModulesApi/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutEspModule(string id, EspModule espModule)
-        //{
-        //    if (id != espModule.CodeModule)
-        //    {
-        //        return BadRequest();
-        //    }
 
-        //    _context.Entry(espModule).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!EspModuleExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
-
-
-        //// DELETE: api/ModulesApi/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteEspModule(string id)
-        //{
-        //    var espModule = await _context.EspModule.FindAsync(id);
-        //    if (espModule == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.EspModule.Remove(espModule);
-        //    await _context.SaveChangesAsync();
-
-        //    return NoContent();
-        //}
-
-        //private bool EspModuleExists(string id)
-        //{
-        //    return _context.EspModule.Any(e => e.CodeModule == id);
-        //}
+        [HttpDelete("{id}")]
+        public ActionResult DeleteModule(string id)
+        {
+            var moduleModelFromRepo = _repository.GetModule(id);
+            if (moduleModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            _repository.DeleteModule(moduleModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
     }
 }
