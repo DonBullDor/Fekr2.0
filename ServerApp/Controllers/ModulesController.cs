@@ -49,9 +49,9 @@ namespace ServerApp.Controllers
             var moduleModel = _mapper.Map<EspModule>(moduleCreateDto);
             _repository.CreateModule(moduleModel);
             _repository.SaveChanges();
-            var moduleReadDto = _mapper.Map<ClasseReadDto>(moduleModel);
+            var moduleReadDto = _mapper.Map<ModuleReadDto>(moduleModel);
             return CreatedAtRoute(nameof(GetModule),
-            new { Id = moduleReadDto.CodeCl }, moduleReadDto);
+            new { Id = moduleReadDto.CodeModule }, moduleReadDto);
         }
 
         [HttpPut("{id}")]

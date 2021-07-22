@@ -31,12 +31,16 @@ namespace Service.Repository.Modules
 
         public EspModule GetModule(string id)
         {
-            throw new NotImplementedException();
+            return _context.EspModule.FirstOrDefault(p => p.CodeModule == id);
         }
 
         public void CreateModule(EspModule espModule)
         {
-            throw new NotImplementedException();
+            if (espModule == null)
+            {
+                throw new ArgumentNullException(nameof(espModule));
+            }
+            _context.EspModule.Add(espModule);
         }
 
         public void UpdateModule(EspModule espModule)

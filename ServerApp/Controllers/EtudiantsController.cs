@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Data;
 using Data.Etudiant;
+using Domain.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Service.Repository;
@@ -30,15 +31,26 @@ namespace ServerApp.Controllers
         }
 
         // GET: api/EtudiantsApi/5
-        [HttpGet("{id}")]
-        public ActionResult<EtudiantReadDto> GetEspEtudiant(string id)
+        [HttpGet("{id}", Name ="GetEtudiant")]
+        public ActionResult<EtudiantReadDto> GetEtudiant(string id)
         {
             var espEtudiant = _repository.GetEtudiant(id);
             if (espEtudiant == null)
             {
                 return NotFound();
             }
-            return Ok(_mapper.Map<ClasseReadDto>(espEtudiant));
+            return Ok(_mapper.Map<EtudiantReadDto>(espEtudiant));
+        }
+
+        [HttpPost]
+        public ActionResult<EtudiantReadDto> CreateEtudiant(EtudiantCreateDto etudiantCreateDto)
+        {
+            var etudiantModel = _mapper.Map<EspEtudiant>(etudiantCreateDto);
+            _repository.CreateEtudiant(etudiantModel);
+            _repository.SaveChanges();
+            var etudiantReadDto = _mapper.Map<EtudiantReadDto>(etudiantModel);
+            return CreatedAtRoute(nameof(GetEtudiant),
+            new { Id = etudiantReadDto.IdEt }, etudiantReadDto);
         }
 
         [HttpPut("{id}")]
