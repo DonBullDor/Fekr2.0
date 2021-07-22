@@ -1,5 +1,5 @@
 using System;
-using Data;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -8,7 +8,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+
+using Data;
+
 using Newtonsoft.Json.Serialization;
+
 using Service.Repository;
 using Service.Repository.Classes;
 using Service.Repository.Decids;
@@ -65,7 +69,7 @@ namespace ServerApp
                     options
                         .SwaggerDoc("v1",
                         new OpenApiInfo {
-                            Title = "SportsStore API",
+                            Title = "Fekr API",
                             Version = "v1"
                         });
                 });
