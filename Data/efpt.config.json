@@ -1,0 +1,880 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "OracleContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "ProjectRootNamespace": "Data",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "ESPRIT_ADMIN.A",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.AAB",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.AA_PWD_ENS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.AA_TEMP",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.AB",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ADD_NIV_9EME",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.AFFECTATION_EXAMEN",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.A_MOYENNE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.A_NOTE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.A_VALIDATION_NOTE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.CHAMP",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.CHAMP_STR",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.CLASSE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.CODE_NOMENCLATURE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.COMITE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.COMITEVALIDATION",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.COMITE_SPECIALITE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.COMMENTAIRE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.COMPTEUR",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.COMPT_CERT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.CON_MOY_0605",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.DATE_ENT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.DECID",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.DEMANDE_ATTESTATION_ALFIKR",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.EMPLOISEMETUD",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ENTETE_RECLAMATION",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ABSCENCE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ABSENCE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ABSENCE_ENSEIGNANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ABSENCE_LIST",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ABSENCE_NEW",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ABSENCE_TMP",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ABS_NOT_TRANS_SITE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ACTIVITE_EXTRA",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ACTIVITE_JOIN",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ADMIS1415",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ADMISSION",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ADREESE_MAIL_ETUDIANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ADRESSE_MAIL_ESP_ETUDIANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_AFFECTATION_EMPLOI",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_AFF_GROUP_ETUDIANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_AIDE_COURS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_APPRECIATION",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ARCHIVAGE_ETUDIANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ASS_RUB_ET_INS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_AUDIT_ADMISSION",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_AUDIT_CHANGE_CLASSE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_AUDIT_CONNEXION",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_AUDIT_CREDIT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_BILAN_PREPA",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_BLACKLIST",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_CAHIER_TEXT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_CALCUL",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_CCNA3",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_CERTIF",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_COMPORTEMENT_DISCPLINE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_COMPTEUR",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_CONTRAT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_CONVOCATION",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_CORRESPONDANCE_OK_FIKR",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_CORRESP_IDET_COMPTE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_COURS_SOUTIEN_ADMIN",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_COURS_SOUTIEN_ENS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_CREDIT_PANIER",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_CRITERE_EVAL",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_DEPT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_DESCPLINE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_DETAIL_CONTRAT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_DETAIL_RESULTAT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_DEVOIRS_MAISON",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_DIRECTION",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_DISPENSE_ETUDIANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_DISPONIBILITE_ENS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_DISP_CLASS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_DOMAINE_ENSEIGNEMENT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_DOSSIERS_SCOLAIRES",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_EMPLOI",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ENCADREMENT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ENCADREMENT_GP",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ENSEIGNANT_ABS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ENSEIGNANT_FICHEPFE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ENTETE_ABSENCE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ENTETE_NOTE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ENTETE_NOTE_RAT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ETUDIANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ETUDIANT_2013",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ETUDIANT_ENREG",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ETUDIANT_NOTE_GROUPE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ETUDIANT_SEMINAIRE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ETUDIANT_TMP",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ET_NOT_TRANSF_FIN",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_EVALUATION",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_EVALUATION_PREPA",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_EVALUATION_SCOLAIRES",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_EVAL_CL_MODULE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_EXAMEN",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_FICHE_PFE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_FILIERE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_GP_PROJET",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_GROUPE_PROJET",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_GROUPE_TARIF",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ID_MOODLE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_IMPORTSCORE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_INSCRI",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_INSCRIPTION",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_JOURNAL_ETUDIANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_JOURNAL_INSCRIPTION",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_JOURNAL_MDP_ENS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_JOURNAL_NOTE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_JOURNAL_OP_RUBRIQUE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_LOGIN",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_MAIL_ENSEIGNANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_MESSAGE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_MODULE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_MODULE_ETUDIANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_MODULE_PANIER_CLASSE_SAISO",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_MOY_MODULE_ETUDIANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_MOY_MODULE_ET_SEMESTRIEL",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_MOY_PANIER_ETUDIANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_MOY_UE_ETUDIANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_NIVEAU_LANGUE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_NOTE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_NOTE_ANGLAIS_S2",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_NOTE_FIKR",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_NOTE_FRANCAIS_S2",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_NOTE_QI_S2_NEW",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_NOTE_RAT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_OBSERVATION_ENSEIGNANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_OBSERVATION_ETUDIANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ORIENTATION",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_PARENT_PWD",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_PREVISION",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_PROJET",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_PROJET_ETUDIANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_PROJET_N",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_PROJET_NEW",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_PV_CLASSE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_REALISE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_REGLEMENT_ONLINE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_REMARQUE_ABSENCE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_RESULTAT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_RUBRIQUE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_SAISON_CLASSE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_SAISON_UNIVERSITAIRE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_SALLE_CLASSE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_SANCTION",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_SCORE_SPECIALITE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_SEANCE_ENS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_SESSION",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_SUIVI_PROJET_INDIV",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_TAB_PLAN_SALLE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_TEMP_ETUDIANT_ENREG",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_TEMP_SCORE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_TEST_ENS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_TEST_ETUD",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_TICKET_INSCRIPTION",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_TMP_MAIL_ENS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_TOEIC_NB",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_TRACE_CORRECT_NUMCPT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_TRACE_IMP_PIECE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_TRV_COURS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_TRV_QUOT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_UE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_UE_5EMETELINFO",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_UP",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_WHITE_LIST",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ETAT_PAIEMENT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ETU_EMP",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.FICHEPFE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.FRAN",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.FR_CURSUS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.HISTORIQUE_PAIEMENT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.LIAISON_NAV_SCO_NUMTEL",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.LIAISON_SCO_NAV_FIKR",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.MESSAGES",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.NOTESEMINAIRE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.NOTE_S1_2018",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.PBCATCOL",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.PBCATEDT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.PBCATFMT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.PBCATTBL",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.PBCATVLD",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.PLAN_TABLE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.PRESIDENTJURY",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.PRESOUTENANCE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.QUITUS",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.RECLAMATIONN",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.RESULTAT_ET_EDSERVE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.RESULTAT_FINALE_SEM2",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.RESULTAT_FINAL_S1_2018",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.RESULTAT_SEMESTRE2",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.SALLE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.SCOREDO",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.SEMINAIRE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.SEQUENCE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.SESSIONETUDIANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.SESSIONPRESOUTENANCE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.SESSIONSOUTENANCE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.SOCIETE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.SOUTENANCE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.SPECIALITE",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.STR_NOME",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.TABLE_IMPORT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.TYPE_MVT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.ESP_ENSEIGNANT",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.AspNetRoles",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.AspNetUsers",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.AspNetRoleClaims",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.AspNetUserClaims",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.AspNetUserLogins",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.AspNetUserRoles",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ESPRIT_ADMIN.AspNetUserTokens",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "ORCL",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseNoConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}
