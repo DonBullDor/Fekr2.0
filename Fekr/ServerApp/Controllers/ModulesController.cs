@@ -2,6 +2,7 @@
 using Data;
 using Data.Module;
 using Domain.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Service.Repository.Modules;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace ServerApp.Controllers
 
         // GET: api/ModulesApi
         [HttpGet]
-        public ActionResult<IEnumerable<ModuleReadDto>> GetEspModule()
+        public ActionResult<IEnumerable<ModuleReadDto>> GetAllEspModules()
         {
             var modules = _repository.GetAllModules();
             return Ok(_mapper.Map<IEnumerable<ModuleReadDto>>(modules));
@@ -63,6 +64,26 @@ namespace ServerApp.Controllers
                 return NotFound();
             }
             _mapper.Map(moduleUpdateDto, moduleModelFromRepo);
+            _repository.UpdateModule(moduleModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
+
+        [HttpPatch("{id}")]
+        public ActionResult PartialModuleUpdate(string id, JsonPatchDocument<ModuleUpdateDto> patchDoc)
+        {
+            var moduleModelFromRepo = _repository.GetModule(id);
+            if (moduleModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            var moduleToPatch = _mapper.Map<ModuleUpdateDto>(moduleModelFromRepo);
+            patchDoc.ApplyTo(moduleToPatch, ModelState);
+            if (!TryValidateModel(moduleToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+            _mapper.Map(moduleToPatch, moduleModelFromRepo);
             _repository.UpdateModule(moduleModelFromRepo);
             _repository.SaveChanges();
             return NoContent();

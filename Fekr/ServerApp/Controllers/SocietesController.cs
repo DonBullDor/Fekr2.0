@@ -24,7 +24,7 @@ namespace ServerApp.Controllers
 
         // GET: api/SocietesApi
         [HttpGet]
-        public ActionResult<IEnumerable<SocieteReadDto>> GetSociete()
+        public ActionResult<IEnumerable<SocieteReadDto>> GetAllSocietes()
         {
             var scociete = _repository.GetAllSocietes();
             return Ok(_mapper.Map<IEnumerable<SocieteReadDto>>(scociete));

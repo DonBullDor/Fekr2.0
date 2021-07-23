@@ -24,7 +24,7 @@ namespace ServerApp.Controllers
 
         // GET: api/Enseignants
         [HttpGet]
-        public ActionResult<IEnumerable<EnseignantReadDto>> GetEspEnseignant()
+        public ActionResult<IEnumerable<EnseignantReadDto>> GetAllEspEnseignants()
         {
             var enseignants = _repository.GetAllEnseignants();
             return Ok(_mapper.Map<IEnumerable<EnseignantReadDto>>(enseignants));

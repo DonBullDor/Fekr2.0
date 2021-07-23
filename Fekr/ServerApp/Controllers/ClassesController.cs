@@ -24,7 +24,7 @@ namespace ServerApp.Controllers
 
         // GET: api/ClassesApi
         [HttpGet]
-        public ActionResult<IEnumerable<ClasseReadDto>> GetClasse()
+        public ActionResult<IEnumerable<ClasseReadDto>> GetAllClasses()
         {
             var classes = _repository.GetAllClasses();
             return Ok(_mapper.Map<IEnumerable<ClasseReadDto>>(classes));

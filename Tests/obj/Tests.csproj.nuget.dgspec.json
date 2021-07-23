@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Tests\\Tests.csproj": {}
+    "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Tests\\Tests.csproj": {}
   },
   "projects": {
-    "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Data\\Domain.csproj": {
+    "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Data\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Data\\Domain.csproj",
+        "projectUniqueName": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Data\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Data\\Domain.csproj",
+        "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Data\\Domain.csproj",
         "packagesPath": "C:\\Users\\lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Data\\obj\\",
+        "outputPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -82,14 +82,14 @@
         }
       }
     },
-    "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Domain\\Data.csproj": {
+    "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Domain\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Domain\\Data.csproj",
+        "projectUniqueName": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Domain\\Data.csproj",
         "projectName": "Data",
-        "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Domain\\Data.csproj",
+        "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Domain\\Data.csproj",
         "packagesPath": "C:\\Users\\lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Domain\\obj\\",
+        "outputPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -106,8 +106,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Data\\Domain.csproj": {
-                "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Data\\Domain.csproj"
+              "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Data\\Domain.csproj": {
+                "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Data\\Domain.csproj"
               }
             }
           }
@@ -160,14 +160,14 @@
         }
       }
     },
-    "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\ServerApp\\ServerApp.csproj": {
+    "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Fekr\\ServerApp\\ServerApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\ServerApp\\ServerApp.csproj",
+        "projectUniqueName": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Fekr\\ServerApp\\ServerApp.csproj",
         "projectName": "ServerApp",
-        "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\ServerApp\\ServerApp.csproj",
+        "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Fekr\\ServerApp\\ServerApp.csproj",
         "packagesPath": "C:\\Users\\lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\ServerApp\\obj\\",
+        "outputPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Fekr\\ServerApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -184,14 +184,14 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Data\\Domain.csproj": {
-                "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Data\\Domain.csproj"
+              "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Data\\Domain.csproj": {
+                "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Data\\Domain.csproj"
               },
-              "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Domain\\Data.csproj": {
-                "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Domain\\Data.csproj"
+              "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Domain\\Data.csproj": {
+                "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Domain\\Data.csproj"
               },
-              "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Service\\Service.csproj": {
-                "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Service\\Service.csproj"
+              "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Fekr\\Service\\Service.csproj": {
+                "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Fekr\\Service\\Service.csproj"
               }
             }
           }
@@ -245,6 +245,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.1.4, )"
             }
           },
           "imports": [
@@ -269,14 +273,14 @@
         }
       }
     },
-    "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Service\\Service.csproj": {
+    "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Fekr\\Service\\Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Service\\Service.csproj",
+        "projectUniqueName": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Fekr\\Service\\Service.csproj",
         "projectName": "Service",
-        "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Service\\Service.csproj",
+        "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Fekr\\Service\\Service.csproj",
         "packagesPath": "C:\\Users\\lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Service\\obj\\",
+        "outputPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Fekr\\Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -293,11 +297,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Data\\Domain.csproj": {
-                "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Data\\Domain.csproj"
+              "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Data\\Domain.csproj": {
+                "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Data\\Domain.csproj"
               },
-              "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Domain\\Data.csproj": {
-                "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Domain\\Data.csproj"
+              "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Domain\\Data.csproj": {
+                "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Domain\\Data.csproj"
               }
             }
           }
@@ -342,14 +346,14 @@
         }
       }
     },
-    "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Tests\\Tests.csproj": {
+    "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Tests\\Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Tests\\Tests.csproj",
+        "projectUniqueName": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Tests\\Tests.csproj",
         "projectName": "Tests",
-        "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Tests\\Tests.csproj",
+        "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Tests\\Tests.csproj",
         "packagesPath": "C:\\Users\\lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Tests\\obj\\",
+        "outputPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -366,8 +370,17 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\ServerApp\\ServerApp.csproj": {
-                "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\ServerApp\\ServerApp.csproj"
+              "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Data\\Domain.csproj": {
+                "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Data\\Domain.csproj"
+              },
+              "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Domain\\Data.csproj": {
+                "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Domain\\Data.csproj"
+              },
+              "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Fekr\\ServerApp\\ServerApp.csproj": {
+                "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Fekr\\ServerApp\\ServerApp.csproj"
+              },
+              "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Fekr\\Service\\Service.csproj": {
+                "projectPath": "C:\\Files\\Workplace\\PFE\\Fekr 2.0\\Fekr\\Fekr\\Service\\Service.csproj"
               }
             }
           }
@@ -385,6 +398,10 @@
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[16.9.4, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.16.1, )"
             },
             "coverlet.collector": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",

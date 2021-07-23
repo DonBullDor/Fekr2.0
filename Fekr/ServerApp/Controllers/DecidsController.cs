@@ -24,7 +24,7 @@ namespace ServerApp.Controllers
 
         // GET: api/Decids
         [HttpGet]
-        public ActionResult<IEnumerable<DecidReadDto>> GetDecid()
+        public ActionResult<IEnumerable<DecidReadDto>> GetAllDecids()
         {
             var decids = _repository.GetAllDecids();
             return Ok(_mapper.Map<IEnumerable<DecidReadDto>>(decids));

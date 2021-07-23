@@ -29,7 +29,7 @@ namespace Service.Repository.Societes
 
         public Societe GetSociete(string id)
         {
-            return _context.Societe.FirstOrDefault(p => p.AnneeDeb == id);
+            return _context.Societe.FirstOrDefault(p => p.CodeSoc == id);
         }
 
         public void CreateSociete(Societe societe)
