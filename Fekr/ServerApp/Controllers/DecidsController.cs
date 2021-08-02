@@ -1,11 +1,14 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using Data;
 using Data.Decids;
 using Domain.Models;
-using Microsoft.AspNetCore.Mvc;
-using Service.Repository.Decids;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
+using ServerApp.Helpers.Admin;
+using ServerApp.Models;
+using ServerApp.Services;
+using Service.Repository.Decids;
 
 namespace ServerApp.Controllers
 {
@@ -14,14 +17,23 @@ namespace ServerApp.Controllers
     public class DecidsController : ControllerBase
     {
         private readonly IDecidsApiRepo _repository;
+
+        private readonly IAdminLoginService _service;
+
         private readonly IMapper _mapper;
 
-        public DecidsController(IDecidsApiRepo repository, IMapper mapper)
+        public DecidsController(
+            IDecidsApiRepo repository,
+            IMapper mapper,
+            IAdminLoginService service
+        )
         {
             _repository = repository;
             _mapper = mapper;
+            _service = service;
         }
 
+/*
         // GET: api/Decids
         [HttpGet]
         public ActionResult<IEnumerable<DecidReadDto>> GetAllDecids()
@@ -29,7 +41,7 @@ namespace ServerApp.Controllers
             var decids = _repository.GetAllDecids();
             return Ok(_mapper.Map<IEnumerable<DecidReadDto>>(decids));
         }
-
+*/
         // GET: api/Decids/5
         [HttpGet("{id}", Name = "GetDecid")]
         public ActionResult<DecidReadDto> GetDecid(string id)
@@ -45,32 +57,39 @@ namespace ServerApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult<DecidReadDto> CreateDecid(DecidCreateDto decidCreateDto)
+        public ActionResult<DecidReadDto>
+        CreateDecid(DecidCreateDto decidCreateDto)
         {
             var decidModel = _mapper.Map<Decid>(decidCreateDto);
-            _repository.CreateDecid(decidModel);
+            _repository.CreateDecid (decidModel);
             _repository.SaveChanges();
             var decidReadDto = _mapper.Map<DecidReadDto>(decidModel);
             return CreatedAtRoute(nameof(GetDecid),
-            new { Id = decidReadDto.IdDecid }, decidReadDto);
+            new { Id = decidReadDto.IdDecid },
+            decidReadDto);
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateDecid(string id, DecidUpdateDto decidUpdateDto)
+        public ActionResult
+        UpdateDecid(string id, DecidUpdateDto decidUpdateDto)
         {
             var decidModelFromRepo = _repository.GetDecid(id);
             if (decidModelFromRepo == null)
             {
                 return NotFound();
             }
-            _mapper.Map(decidUpdateDto, decidModelFromRepo);
-            _repository.UpdateDecid(decidModelFromRepo);
+            _mapper.Map (decidUpdateDto, decidModelFromRepo);
+            _repository.UpdateDecid (decidModelFromRepo);
             _repository.SaveChanges();
             return NoContent();
         }
 
         [HttpPatch("{id}")]
-        public ActionResult PartialDecidUpdate(string id, JsonPatchDocument<DecidUpdateDto> patchDoc)
+        public ActionResult
+        PartialDecidUpdate(
+            string id,
+            JsonPatchDocument<DecidUpdateDto> patchDoc
+        )
         {
             var decidModelFromRepo = _repository.GetDecid(id);
             if (decidModelFromRepo == null)
@@ -78,13 +97,13 @@ namespace ServerApp.Controllers
                 return NotFound();
             }
             var decidToPatch = _mapper.Map<DecidUpdateDto>(decidModelFromRepo);
-            patchDoc.ApplyTo(decidToPatch, ModelState);
+            patchDoc.ApplyTo (decidToPatch, ModelState);
             if (!TryValidateModel(decidToPatch))
             {
                 return ValidationProblem(ModelState);
             }
-            _mapper.Map(decidToPatch, decidModelFromRepo);
-            _repository.UpdateDecid(decidModelFromRepo);
+            _mapper.Map (decidToPatch, decidModelFromRepo);
+            _repository.UpdateDecid (decidModelFromRepo);
             _repository.SaveChanges();
             return NoContent();
         }
@@ -97,9 +116,31 @@ namespace ServerApp.Controllers
             {
                 return NotFound();
             }
-            _repository.DeleteDecid(decidModelFromRepo);
+            _repository.DeleteDecid (decidModelFromRepo);
             _repository.SaveChanges();
             return NoContent();
         }
+
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate(AuthenticateRequest model)
+        {
+            var response = _service.Authenticate(model);
+
+            if (response == null)
+                return BadRequest(new {
+                    message = "Username or password is incorrect"
+                });
+
+            return Ok(response);
+        }
+
+        [AdminAuthorize]
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var users = _service.GetAll();
+            return Ok(users);
+        }
+        
     }
 }

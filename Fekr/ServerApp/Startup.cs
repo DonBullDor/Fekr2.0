@@ -20,6 +20,11 @@ using Service.Repository.Enseignant;
 using Service.Repository.Etudiant;
 using Service.Repository.Modules;
 using Service.Repository.Societes;
+using ServerApp.Helpers;
+using ServerApp.Services;
+using ServerApp.Helpers.Admin;
+using ServerApp.Helpers.Enseignant;
+using ServerApp.Helpers.Parent;
 
 namespace ServerApp
 {
@@ -40,6 +45,7 @@ namespace ServerApp
                 {
                     opts.JsonSerializerOptions.IgnoreNullValues = true;
                 });
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services
                 .AddDbContext<Oracle1Context>(options =>
@@ -54,7 +60,10 @@ namespace ServerApp
             services.AddScoped<IDecidsApiRepo, DecidsApiRepo>();
             services.AddScoped<ISocietesApiRepo, SocieteApiRepo>();
             services.AddScoped<IEnseignantApiRepo, EnseignantApiRepo>();
-
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAdminLoginService, AdminLoginService>();
+            services.AddScoped<IEnseignantLoginService, EnseignantLoginService>();
+            services.AddScoped<IParentLoginService, ParentLoginService>();
             services
                 .AddControllers()
                 .AddNewtonsoftJson(option =>
@@ -92,7 +101,10 @@ namespace ServerApp
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseMiddleware<JwtMiddleware>();
+            app.UseMiddleware<AdminJwtMiddleware>();
+            app.UseMiddleware<EnseignantJwtMiddleware>();
+            app.UseMiddleware<ParentJwtMiddleware>();
             app
                 .UseEndpoints(endpoints =>
                 {

@@ -21,7 +21,7 @@ namespace Service.Repository.Decids
             {
                 throw new ArgumentNullException(nameof(decid));
             }
-            _context.Decid.Remove(decid);
+            _context.Decid.Remove (decid);
         }
 
         public IEnumerable<Decid> GetAllDecids()
@@ -40,7 +40,7 @@ namespace Service.Repository.Decids
             {
                 throw new ArgumentNullException(nameof(decid));
             }
-            _context.Decid.Add(decid);
+            _context.Decid.Add (decid);
         }
 
         public void UpdateDecid(Decid decid)
@@ -51,5 +51,7 @@ namespace Service.Repository.Decids
         {
             return (_context.SaveChanges() >= 0);
         }
+
+        //Login
     }
 }

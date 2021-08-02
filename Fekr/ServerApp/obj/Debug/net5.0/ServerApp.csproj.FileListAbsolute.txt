@@ -346,3 +346,4 @@ C:\Files\Workplace\PFE\Fekr 2.0\Fekr\Fekr\ServerApp\obj\Debug\net5.0\ServerApp.d
 C:\Files\Workplace\PFE\Fekr 2.0\Fekr\Fekr\ServerApp\obj\Debug\net5.0\ref\ServerApp.dll
 C:\Files\Workplace\PFE\Fekr 2.0\Fekr\Fekr\ServerApp\obj\Debug\net5.0\ServerApp.pdb
 C:\Files\Workplace\PFE\Fekr 2.0\Fekr\Fekr\ServerApp\obj\Debug\net5.0\ServerApp.genruntimeconfig.cache
+C:\Files\Workplace\PFE\Fekr 2.0\Fekr\Fekr\ServerApp\bin\Debug\net5.0\BCrypt.Net-Next.dll
