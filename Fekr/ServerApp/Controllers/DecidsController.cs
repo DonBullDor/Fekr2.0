@@ -18,22 +18,20 @@ namespace ServerApp.Controllers
     {
         private readonly IDecidsApiRepo _repository;
 
-        private readonly IAdminLoginService _service;
+        
 
         private readonly IMapper _mapper;
 
         public DecidsController(
             IDecidsApiRepo repository,
-            IMapper mapper,
-            IAdminLoginService service
+            IMapper mapper
         )
         {
             _repository = repository;
             _mapper = mapper;
-            _service = service;
+           
         }
 
-/*
         // GET: api/Decids
         [HttpGet]
         public ActionResult<IEnumerable<DecidReadDto>> GetAllDecids()
@@ -41,7 +39,7 @@ namespace ServerApp.Controllers
             var decids = _repository.GetAllDecids();
             return Ok(_mapper.Map<IEnumerable<DecidReadDto>>(decids));
         }
-*/
+
         // GET: api/Decids/5
         [HttpGet("{id}", Name = "GetDecid")]
         public ActionResult<DecidReadDto> GetDecid(string id)
@@ -120,7 +118,7 @@ namespace ServerApp.Controllers
             _repository.SaveChanges();
             return NoContent();
         }
-
+ /*
         [HttpPost("authenticate")]
         public IActionResult Authenticate(AuthenticateRequest model)
         {
@@ -141,6 +139,6 @@ namespace ServerApp.Controllers
             var users = _service.GetAll();
             return Ok(users);
         }
-        
+  */      
     }
 }
