@@ -18,18 +18,12 @@ namespace ServerApp.Controllers
     {
         private readonly IDecidsApiRepo _repository;
 
-        
-
         private readonly IMapper _mapper;
 
-        public DecidsController(
-            IDecidsApiRepo repository,
-            IMapper mapper
-        )
+        public DecidsController(IDecidsApiRepo repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
-           
         }
 
         // GET: api/Decids
@@ -118,7 +112,7 @@ namespace ServerApp.Controllers
             _repository.SaveChanges();
             return NoContent();
         }
- /*
+        /*
         [HttpPost("authenticate")]
         public IActionResult Authenticate(AuthenticateRequest model)
         {
@@ -139,6 +133,6 @@ namespace ServerApp.Controllers
             var users = _service.GetAll();
             return Ok(users);
         }
-  */      
+  */
     }
 }

@@ -20,7 +20,8 @@ namespace ServerApp
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<StartupBackup>();
+                    //.UseUrls("http://localhost:5000");
                 });
     }
 }
