@@ -137,12 +137,12 @@ namespace ServerApp.Controllers
             return Ok(response);
         }
 
-        [EnseignantAuthorize]
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            var users = _service.GetAll();
-            return Ok(users);
-        }
+        // [EnseignantAuthorize]
+        // [HttpGet]
+        // public IActionResult GetAll()
+        // {
+        //     var users = _service.GetAll();
+        //     return Ok(users);
+        // }
     }
 }
