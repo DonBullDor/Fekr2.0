@@ -18,4 +18,9 @@
     <ProjectReference Include="..\..\Domain\Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repository\Plan_etude\" />
+    <Folder Include="Repository\Notes\" />
+  </ItemGroup>
+
 </Project>

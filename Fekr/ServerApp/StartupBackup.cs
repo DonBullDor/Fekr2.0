@@ -2,7 +2,6 @@ using System;
 using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +19,9 @@ using Service.Repository.Decids;
 using Service.Repository.Enseignant;
 using Service.Repository.Etudiant;
 using Service.Repository.Modules;
+using Service.Repository.Moyenne;
+using Service.Repository.Notes;
+using Service.Repository.Plan_etude;
 using Service.Repository.Societes;
 
 namespace ServerApp
@@ -37,7 +39,11 @@ namespace ServerApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(option =>
+                 {
+                    option.SerializerSettings.ContractResolver =
+                         new CamelCasePropertyNamesContractResolver();
+                 });
 
             services
                 .AddDbContext<Oracle1Context>(options =>
@@ -66,6 +72,9 @@ namespace ServerApp
 
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IPlanEtudeApiRepo, PlanEtudeApiRepo>();
+            services.AddScoped<INotesApiRepo, NotesApiRepo>();
+            services.AddScoped<IMoyenneApiRepo, MoyenneApiRepo>();
         }
 
         // configure the HTTP request pipeline
