@@ -10,17 +10,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.12.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Domain.csproj" />
     <ProjectReference Include="..\..\Domain\Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Repository\Plan_etude\" />
-    <Folder Include="Repository\Notes\" />
   </ItemGroup>
 
 </Project>

@@ -6,11 +6,11 @@ using Domain.Models;
 
 namespace Service.Repository.Decids
 {
-    public class DecidsApiRepo : IDecidsApiRepo
+    public class AdminApiRepo : IAdminApiRepo
     {
         private readonly Oracle1Context _context;
 
-        public DecidsApiRepo(Oracle1Context context)
+        public AdminApiRepo(Oracle1Context context)
         {
             _context = context;
         }

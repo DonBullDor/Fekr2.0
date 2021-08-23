@@ -4,6 +4,8 @@ using Data.Etudiant;
 using Domain.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Service.IConfiguration;
 using Service.Repository;
 using System.Collections.Generic;
 
@@ -15,10 +17,18 @@ namespace ServerApp.Controllers
     {
         private readonly IEtudiantApiRepo _repository;
         private readonly IMapper _mapper;
+        private IUnitOfWork _unitOfWork;
+        private readonly ILogger<EtudiantsController> _logger;
 
-        public EtudiantsController(IEtudiantApiRepo repository, IMapper mapper)
+        public EtudiantsController(
+            //IEtudiantApiRepo repository,
+            IUnitOfWork unitOfWork,
+            IMapper mapper, 
+            ILogger<EtudiantsController> logger)
         {
-            _repository = repository;
+            //_repository = repository;
+            _unitOfWork = unitOfWork;
+            _logger = logger;
             _mapper = mapper;
         }
 
@@ -26,10 +36,12 @@ namespace ServerApp.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<EtudiantReadDto>> GetAllEspEtudiants()
         {
-            var etudiants = _repository.GetAllEtudiant();
-            return Ok(_mapper.Map<IEnumerable<EtudiantReadDto>>(etudiants));
+            //var etudiants = _repository.GetAllEtudiant();
+            var etudiants = _unitOfWork.Etudiants.All();
+            //return Ok(_mapper.Map<IEnumerable<EtudiantReadDto>>(etudiants));
+            return Ok(etudiants);
         }
-
+        /*
         // GET: api/EtudiantsApi/5
         [HttpGet("{id}", Name ="GetEtudiant")]
         public ActionResult<EtudiantReadDto> GetEtudiant(string id)
@@ -100,5 +112,6 @@ namespace ServerApp.Controllers
             _repository.SaveChanges();
             return NoContent();
         }
+        */
     }
 }

@@ -14,13 +14,13 @@ namespace ServerApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DecidsController : ControllerBase
+    public class AdminController : ControllerBase
     {
-        private readonly IDecidsApiRepo _repository;
+        private readonly IAdminApiRepo _repository;
 
         private readonly IMapper _mapper;
 
-        public DecidsController(IDecidsApiRepo repository, IMapper mapper)
+        public AdminController(IAdminApiRepo repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;

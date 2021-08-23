@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Service.Repository.Decids
 {
-    public interface IDecidsApiRepo
+    public interface IAdminApiRepo
     {
         bool SaveChanges();
         
