@@ -13,16 +13,16 @@ using Xunit;
 
 namespace Tests
 {
-    public class DecidsControllerTests : IDisposable
+    public class AdminControllerTests : IDisposable
     {
-        private Mock<IDecidsApiRepo> mockRepo;
+        private Mock<IAdminApiRepo> mockRepo;
         private DecidProfile realProfile;
         private MapperConfiguration configuration;
         private IMapper mapper;
 
-        public DecidsControllerTests()
+        public AdminControllerTests()
         {
-            mockRepo = new Mock<IDecidsApiRepo>();
+            mockRepo = new Mock<IAdminApiRepo>();
             realProfile = new DecidProfile();
             configuration =
                 new MapperConfiguration(cfg => cfg.AddProfile(realProfile));
@@ -41,7 +41,7 @@ namespace Tests
         public void GetDecidItems_ReturnsZeroItems_WhenDBIsEmpty()
         {
             //Arrange
-            var mockRepo = new Mock<IDecidsApiRepo>();
+            var mockRepo = new Mock<IAdminApiRepo>();
             mockRepo
                 .Setup(repo => repo.GetAllDecids())
                 .Returns(GetDecids(0));
@@ -49,7 +49,7 @@ namespace Tests
             var configuration =
                 new MapperConfiguration(cfg => cfg.AddProfile(realProfile));
             IMapper mapper = new Mapper(configuration);
-            var controller = new DecidsController(mockRepo.Object, mapper);
+            var controller = new AdminController(mockRepo.Object, mapper);
 
             //Act
             var result = controller.GetAllDecids();
@@ -83,7 +83,7 @@ namespace Tests
             mockRepo
                 .Setup(repo => repo.GetAllDecids())
                 .Returns(GetDecids(1));
-            var controller = new DecidsController(mockRepo.Object, mapper);
+            var controller = new AdminController(mockRepo.Object, mapper);
 
             //Act
             var result = controller.GetAllDecids();
@@ -101,7 +101,7 @@ namespace Tests
             mockRepo
                 .Setup(repo => repo.GetAllDecids())
                 .Returns(GetDecids(1));
-            var controller = new DecidsController(mockRepo.Object, mapper);
+            var controller = new AdminController(mockRepo.Object, mapper);
 
             //Act
             var result = controller.GetAllDecids();
@@ -117,7 +117,7 @@ namespace Tests
             mockRepo
                 .Setup(repo => repo.GetAllDecids())
                 .Returns(GetDecids(1));
-            var controller = new DecidsController(mockRepo.Object, mapper);
+            var controller = new AdminController(mockRepo.Object, mapper);
 
             //Act
             var result = controller.GetAllDecids(); //Assert
@@ -131,7 +131,7 @@ namespace Tests
         {
             //Arrange
             mockRepo.Setup(repo => repo.GetDecid("0")).Returns(() => null);
-            var controller = new DecidsController(mockRepo.Object, mapper);
+            var controller = new AdminController(mockRepo.Object, mapper);
 
             //Act
             var result = controller.GetDecid("1");
@@ -154,7 +154,7 @@ namespace Tests
                     EtatDecid = "NULL",
                     PwdDecid = "PWD"
                 });
-            var controller = new DecidsController(mockRepo.Object, mapper);
+            var controller = new AdminController(mockRepo.Object, mapper);
 
             //Act
             var result = controller.GetDecid("1");
@@ -177,7 +177,7 @@ namespace Tests
                     EtatDecid = "NULL",
                     PwdDecid = "PWD"
                 });
-            var controller = new DecidsController(mockRepo.Object, mapper);
+            var controller = new AdminController(mockRepo.Object, mapper);
 
             //Act
             var result = controller.GetDecid("1");
@@ -200,7 +200,7 @@ namespace Tests
                     EtatDecid = "NULL",
                     PwdDecid = "PWD"
                 });
-            var controller = new DecidsController(mockRepo.Object, mapper);
+            var controller = new AdminController(mockRepo.Object, mapper);
 
             //Act
             var result = controller.CreateDecid(new DecidCreateDto { });
@@ -223,7 +223,7 @@ namespace Tests
                     EtatDecid = "NULL",
                     PwdDecid = "PWD"
                 });
-            var controller = new DecidsController(mockRepo.Object, mapper);
+            var controller = new AdminController(mockRepo.Object, mapper);
 
             //Act
             var result = controller.CreateDecid(new DecidCreateDto { });
@@ -246,7 +246,7 @@ namespace Tests
                     EtatDecid = "NULL",
                     PwdDecid = "PWD"
                 });
-            var controller = new DecidsController(mockRepo.Object, mapper);
+            var controller = new AdminController(mockRepo.Object, mapper);
 
             //Act
             var result = controller.UpdateDecid("1", new DecidUpdateDto { });
@@ -260,7 +260,7 @@ namespace Tests
         {
             //Arrange
             mockRepo.Setup(repo => repo.GetDecid("0")).Returns(() => null);
-            var controller = new DecidsController(mockRepo.Object, mapper);
+            var controller = new AdminController(mockRepo.Object, mapper);
 
             //Act
             var result = controller.UpdateDecid("0", new DecidUpdateDto { });
@@ -274,7 +274,7 @@ namespace Tests
         {
             //Arrange
             mockRepo.Setup(repo => repo.GetDecid("0")).Returns(() => null);
-            var controller = new DecidsController(mockRepo.Object, mapper);
+            var controller = new AdminController(mockRepo.Object, mapper);
 
             //Act
             var result =
@@ -302,7 +302,7 @@ namespace Tests
                     EtatDecid = "NULL",
                     PwdDecid = "PWD"
                 });
-            var controller = new DecidsController(mockRepo.Object, mapper);
+            var controller = new AdminController(mockRepo.Object, mapper);
 
             //Act
             var result = controller.DeleteDecid("1");
@@ -316,7 +316,7 @@ namespace Tests
         {
             //Arrange
             mockRepo.Setup(repo => repo.GetDecid("0")).Returns(() => null);
-            var controller = new DecidsController(mockRepo.Object, mapper);
+            var controller = new AdminController(mockRepo.Object, mapper);
 
             //Act
             var result = controller.DeleteDecid("0");
