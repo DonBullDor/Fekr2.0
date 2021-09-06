@@ -11,7 +11,7 @@ namespace Service.Repository.Plan_etude
         bool SaveChanges();
         IEnumerable<EspModulePanierClasseSaiso> GetAllPlanEtude();
 
-        EspModulePanierClasseSaiso GetPlanEtudeById(string planEtude);
+        IEnumerable<EspModulePanierClasseSaiso> GetPlanEtudeById(string planEtude);
 
         void UpdatePlanEtude(EspModulePanierClasseSaiso planEtude);
 

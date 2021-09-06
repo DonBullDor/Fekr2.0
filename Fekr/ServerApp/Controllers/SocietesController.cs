@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Data;
-using Data.Societes;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service.Repository.Societes;
 using System.Collections.Generic;
+using Data.Societe;
 using Microsoft.AspNetCore.JsonPatch;
 
 namespace ServerApp.Controllers

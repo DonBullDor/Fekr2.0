@@ -1,44 +1,45 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using AutoMapper;
 using Data;
 using Data.Classes;
 using Domain.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using ServerApp.Controllers;
 using ServerApp.Profiles;
 using Service.Repository.Classes;
-using System;
-using System.Collections.Generic;
 using Xunit;
 
 namespace Tests
 {
     public class ClassesControllerTests : IDisposable
     {
-        private Mock<IClassesApiRepo> mockRepo;
-        private ClasseProfile realProfile;
-        private MapperConfiguration configuration;
-        private IMapper mapper;
-
+        private Mock<IClassesApiRepo> _mockRepo;
+        private ClasseProfile _realProfile;
+        private MapperConfiguration _configuration;
+        private IMapper _mapper;
+        
         public ClassesControllerTests()
         {
-            mockRepo = new Mock<IClassesApiRepo>();
-            realProfile = new ClasseProfile();
-            configuration =
-                new MapperConfiguration(cfg => cfg.AddProfile(realProfile));
-            mapper = new Mapper(configuration);
+            _mockRepo = new Mock<IClassesApiRepo>();
+            _realProfile = new ClasseProfile();
+            _configuration =
+                new MapperConfiguration(cfg => cfg.AddProfile(_realProfile));
+            _mapper = new Mapper(_configuration);
         }
 
         public void Dispose()
         {
-            mockRepo = null;
-            mapper = null;
-            configuration = null;
-            realProfile = null;
+            _mockRepo = null;
+            _mapper = null;
+            _configuration = null;
+            _realProfile = null;
         }
 
         [Fact]
-        public void GetClasseItems_ReturnsZeroItems_WhenDBIsEmpty()
+        public void GetClasse_ReturnsZeroClasse_WhenDBIsEmpty()
         {
             //Arrange
             var mockRepo = new Mock<IClassesApiRepo>();
@@ -78,10 +79,10 @@ namespace Tests
         public void GetAllClasses_ReturnsOneItem_WhenDBHasOneResource()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetAllClasses())
                 .Returns(GetClasses(1));
-            var controller = new ClassesController(mockRepo.Object, mapper);
+            var controller = new ClassesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetAllClasses();
@@ -96,10 +97,10 @@ namespace Tests
         public void GetAllClasses_Returns200OK_WhenDBHasOneResource()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetAllClasses())
                 .Returns(GetClasses(1));
-            var controller = new ClassesController(mockRepo.Object, mapper);
+            var controller = new ClassesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetAllClasses();
@@ -112,10 +113,10 @@ namespace Tests
         public void GetAllClasses_ReturnsCorrectType_WhenDBHasOneResource()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetAllClasses())
                 .Returns(GetClasses(1));
-            var controller = new ClassesController(mockRepo.Object, mapper);
+            var controller = new ClassesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetAllClasses(); //Assert
@@ -128,8 +129,8 @@ namespace Tests
         public void GetClasseByID_Returns404NotFound_WhenNonExistentIDProvided()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetClasse("0")).Returns(() => null);
-            var controller = new ClassesController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetClasse("0")).Returns(() => null);
+            var controller = new ClassesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetClasse("1");
@@ -142,7 +143,7 @@ namespace Tests
         public void GetClasseByID_Returns200OK__WhenValidIDProvided()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetClasse("1"))
                 .Returns(new Classe
                 {
@@ -150,7 +151,7 @@ namespace Tests
                     LibelleCl = "4t2",
                     DescriptionCl = "desc"
                 });
-            var controller = new ClassesController(mockRepo.Object, mapper);
+            var controller = new ClassesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetClasse("1");
@@ -163,7 +164,7 @@ namespace Tests
         public void GetClasseByID_Returns200OK__WhenValidIDProvided2()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetClasse("1"))
                 .Returns(new Classe
                 {
@@ -171,7 +172,7 @@ namespace Tests
                     LibelleCl = "4t2",
                     DescriptionCl = "desc"
                 });
-            var controller = new ClassesController(mockRepo.Object, mapper);
+            var controller = new ClassesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetClasse("1");
@@ -184,7 +185,7 @@ namespace Tests
         public void CreateClasse_ReturnsCorrectResourceType_WhenValidObjectSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetClasse("1"))
                 .Returns(new Classe
                 {
@@ -192,10 +193,10 @@ namespace Tests
                     LibelleCl = "4t2",
                     DescriptionCl = "desc"
                 });
-            var controller = new ClassesController(mockRepo.Object, mapper);
+            var controller = new ClassesController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.CreateClasse(new ClasseCreateDto { });
+            var result = controller.CreateClasse(new ClasseCreateDto());
 
             //Assert
             Assert.IsType<ActionResult<ClasseReadDto>>(result);
@@ -205,7 +206,7 @@ namespace Tests
         public void CreateClasse_Returns201Created_WhenValidObjectSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetClasse("1"))
                 .Returns(new Classe
                 {
@@ -213,10 +214,10 @@ namespace Tests
                     LibelleCl = "4t2",
                     DescriptionCl = "desc"
                 });
-            var controller = new ClassesController(mockRepo.Object, mapper);
+            var controller = new ClassesController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.CreateClasse(new ClasseCreateDto { });
+            var result = controller.CreateClasse(new ClasseCreateDto());
 
             //Assert
             Assert.IsType<CreatedAtRouteResult>(result.Result);
@@ -226,7 +227,7 @@ namespace Tests
         public void UpdateClasse_Returns204NoContent_WhenValidObjectSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetClasse("1"))
                 .Returns(new Classe
                 {
@@ -234,10 +235,10 @@ namespace Tests
                     LibelleCl = "4t2",
                     DescriptionCl = "desc"
                 });
-            var controller = new ClassesController(mockRepo.Object, mapper);
+            var controller = new ClassesController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.UpdateClasse("1", new ClasseUpdateDto { });
+            var result = controller.UpdateClasse("1", new ClasseUpdateDto());
 
             //Assert
             Assert.IsType<NoContentResult>(result);
@@ -247,11 +248,11 @@ namespace Tests
         public void UpdateClasse_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetClasse("0")).Returns(() => null);
-            var controller = new ClassesController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetClasse("0")).Returns(() => null);
+            var controller = new ClassesController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.UpdateClasse("0", new ClasseUpdateDto { });
+            var result = controller.UpdateClasse("0", new ClasseUpdateDto());
 
             //Assert
             Assert.IsType<NotFoundResult>(result);
@@ -261,16 +262,15 @@ namespace Tests
         public void PartialClasseUpdate_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetClasse("0")).Returns(() => null);
-            var controller = new ClassesController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetClasse("0")).Returns(() => null);
+            var controller = new ClassesController(_mockRepo.Object, _mapper);
 
             //Act
             var result =
                 controller
                     .PartialClasseUpdate("0",
-                    new Microsoft.AspNetCore.JsonPatch.JsonPatchDocument<ClasseUpdateDto
-                    >
-                    { });
+                    new JsonPatchDocument<ClasseUpdateDto
+                    >());
 
             //Assert
             Assert.IsType<NotFoundResult>(result);
@@ -280,7 +280,7 @@ namespace Tests
         public void DeleteClasse_Returns204NoContent_WhenValidResourceIDSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetClasse("1"))
                 .Returns(new Classe
                 {
@@ -288,7 +288,7 @@ namespace Tests
                     LibelleCl = "4t2",
                     DescriptionCl = "desc"
                 });
-            var controller = new ClassesController(mockRepo.Object, mapper);
+            var controller = new ClassesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.DeleteClasse("1");
@@ -301,8 +301,8 @@ namespace Tests
         public void DeleteClasse_Returns_404NotFound_WhenNonExistentResourceIDSubmitted()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetClasse("0")).Returns(() => null);
-            var controller = new ClassesController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetClasse("0")).Returns(() => null);
+            var controller = new ClassesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.DeleteClasse("0");

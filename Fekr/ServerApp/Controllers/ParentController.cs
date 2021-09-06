@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using AutoMapper;
 using Data;
-using Data.Decids;
 using Domain.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;

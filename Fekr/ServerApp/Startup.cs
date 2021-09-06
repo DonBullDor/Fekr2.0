@@ -1,12 +1,10 @@
 using System;
-using Data;
+using Domain.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using ServerApp.Helpers;
 using ServerApp.Helpers.Admin;
@@ -20,6 +18,7 @@ using Service.Repository.Classes;
 using Service.Repository.Decids;
 using Service.Repository.Enseignant;
 using Service.Repository.Etudiant;
+using Service.Repository.ModuleEtudiant;
 using Service.Repository.Modules;
 using Service.Repository.Moyenne;
 using Service.Repository.Notes;
@@ -40,7 +39,12 @@ namespace ServerApp
         // add services to the DI container
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
+            services.AddCors(options => 
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("http://localhost:4200"));
+            }
+            );
             services.AddControllers().AddNewtonsoftJson(option =>
                  {
                     option.SerializerSettings.ContractResolver =
@@ -78,6 +82,7 @@ namespace ServerApp
             services.AddScoped<INotesApiRepo, NotesApiRepo>();
             services.AddScoped<IMoyenneApiRepo, MoyenneApiRepo>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IModuleEtudiant, ModuleEtudiantApiRepo>();
 
         }
 

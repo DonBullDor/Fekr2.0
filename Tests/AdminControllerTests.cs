@@ -1,64 +1,64 @@
-﻿using AutoMapper;
-using Data;
-using Data.Decids;
+﻿using System;
+using System.Collections.Generic;
+using AutoMapper;
+using Data.Admins;
 using Domain.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using ServerApp.Controllers;
 using ServerApp.Profiles;
 using Service.Repository.Decids;
-using System;
-using System.Collections.Generic;
 using Xunit;
 
 namespace Tests
 {
     public class AdminControllerTests : IDisposable
     {
-        private Mock<IAdminApiRepo> mockRepo;
-        private DecidProfile realProfile;
-        private MapperConfiguration configuration;
-        private IMapper mapper;
+        private Mock<IAdminApiRepo> _mockRepo;
+        private AdminProfile _realProfile;
+        private MapperConfiguration _configuration;
+        private IMapper _mapper;
 
         public AdminControllerTests()
         {
-            mockRepo = new Mock<IAdminApiRepo>();
-            realProfile = new DecidProfile();
-            configuration =
-                new MapperConfiguration(cfg => cfg.AddProfile(realProfile));
-            mapper = new Mapper(configuration);
+            _mockRepo = new Mock<IAdminApiRepo>();
+            _realProfile = new AdminProfile();
+            _configuration =
+                new MapperConfiguration(cfg => cfg.AddProfile(_realProfile));
+            _mapper = new Mapper(_configuration);
         }
 
         public void Dispose()
         {
-            mockRepo = null;
-            mapper = null;
-            configuration = null;
-            realProfile = null;
+            _mockRepo = null;
+            _mapper = null;
+            _configuration = null;
+            _realProfile = null;
         }
 
         [Fact]
-        public void GetDecidItems_ReturnsZeroItems_WhenDBIsEmpty()
+        public void GetAdminsItems_ReturnsZeroAdmins_WhenDBIsEmpty()
         {
             //Arrange
             var mockRepo = new Mock<IAdminApiRepo>();
             mockRepo
                 .Setup(repo => repo.GetAllDecids())
-                .Returns(GetDecids(0));
-            var realProfile = new DecidProfile();
+                .Returns(GetAdmins(0));
+            var realProfile = new AdminProfile();
             var configuration =
                 new MapperConfiguration(cfg => cfg.AddProfile(realProfile));
             IMapper mapper = new Mapper(configuration);
             var controller = new AdminController(mockRepo.Object, mapper);
 
             //Act
-            var result = controller.GetAllDecids();
+            var result = controller.GetAllAdmins();
 
             //Assert
             Assert.IsType<OkObjectResult>(result.Result);
         }
 
-        private List<Decid> GetDecids(int num)
+        private List<Decid> GetAdmins(int num)
         {
             var commands = new List<Decid>();
             if (num > 0)
@@ -77,74 +77,74 @@ namespace Tests
         }
 
         [Fact]
-        public void GetAllDecids_ReturnsOneItem_WhenDBHasOneResource()
+        public void GetAllAdmins_ReturnsOneItem_WhenDBHasOneResource()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetAllDecids())
-                .Returns(GetDecids(1));
-            var controller = new AdminController(mockRepo.Object, mapper);
+                .Returns(GetAdmins(1));
+            var controller = new AdminController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.GetAllDecids();
+            var result = controller.GetAllAdmins();
 
             //Assert
             var okResult = result.Result as OkObjectResult;
-            var commands = okResult.Value as List<DecidReadDto>;
+            var commands = okResult.Value as List<AdminReadDto>;
             Assert.Single(commands);
         }
 
         [Fact]
-        public void GetAllDecids_Returns200OK_WhenDBHasOneResource()
+        public void GetAllAdmins_Returns200OK_WhenDBHasOneResource()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetAllDecids())
-                .Returns(GetDecids(1));
-            var controller = new AdminController(mockRepo.Object, mapper);
+                .Returns(GetAdmins(1));
+            var controller = new AdminController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.GetAllDecids();
+            var result = controller.GetAllAdmins();
 
             //Assert
             Assert.IsType<OkObjectResult>(result.Result);
         }
 
         [Fact]
-        public void GetAllDecids_ReturnsCorrectType_WhenDBHasOneResource()
+        public void GetAllAdmins_ReturnsCorrectType_WhenDBHasOneResource()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetAllDecids())
-                .Returns(GetDecids(1));
-            var controller = new AdminController(mockRepo.Object, mapper);
+                .Returns(GetAdmins(1));
+            var controller = new AdminController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.GetAllDecids(); //Assert
-            Assert.IsType<ActionResult<IEnumerable<DecidReadDto>>>(result);
+            var result = controller.GetAllAdmins(); //Assert
+            Assert.IsType<ActionResult<IEnumerable<AdminReadDto>>>(result);
         }
 
         //flag
 
         [Fact]
-        public void GetDecidByID_Returns404NotFound_WhenNonExistentIDProvided()
+        public void GetAdminById_Returns404NotFound_WhenNonExistentIDProvided()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetDecid("0")).Returns(() => null);
-            var controller = new AdminController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetDecid("0")).Returns(() => null);
+            var controller = new AdminController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.GetDecid("1");
+            var result = controller.GetAdmin("1");
 
             //Assert
             Assert.IsType<NotFoundResult>(result.Result);
         }
 
         [Fact]
-        public void GetDecidByID_Returns200OK__WhenValidIDProvided()
+        public void GetAdminById_Returns200OK__WhenValidIDProvided()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetDecid("1"))
                 .Returns(new Decid
                 {
@@ -154,20 +154,20 @@ namespace Tests
                     EtatDecid = "NULL",
                     PwdDecid = "PWD"
                 });
-            var controller = new AdminController(mockRepo.Object, mapper);
+            var controller = new AdminController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.GetDecid("1");
+            var result = controller.GetAdmin("1");
 
             //Assert
             Assert.IsType<OkObjectResult>(result.Result);
         }
 
         [Fact]
-        public void GetDecidByID_Returns200OK__WhenValidIDProvided2()
+        public void GetAdminById_Returns200OK__WhenValidIDProvided2()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetDecid("1"))
                 .Returns(new Decid
                 {
@@ -177,20 +177,20 @@ namespace Tests
                     EtatDecid = "NULL",
                     PwdDecid = "PWD"
                 });
-            var controller = new AdminController(mockRepo.Object, mapper);
+            var controller = new AdminController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.GetDecid("1");
+            var result = controller.GetAdmin("1");
 
             //Assert
-            Assert.IsType<ActionResult<DecidReadDto>>(result);
+            Assert.IsType<ActionResult<AdminReadDto>>(result);
         }
 
         [Fact]
-        public void CreateDecid_ReturnsCorrectResourceType_WhenValidObjectSubmitted()
+        public void CreateAdmin_ReturnsCorrectResourceType_WhenValidObjectSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetDecid("1"))
                 .Returns(new Decid
                 {
@@ -200,20 +200,20 @@ namespace Tests
                     EtatDecid = "NULL",
                     PwdDecid = "PWD"
                 });
-            var controller = new AdminController(mockRepo.Object, mapper);
+            var controller = new AdminController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.CreateDecid(new DecidCreateDto { });
+            var result = controller.CreateAdmin(new AdminCreateDto());
 
             //Assert
-            Assert.IsType<ActionResult<DecidReadDto>>(result);
+            Assert.IsType<ActionResult<AdminReadDto>>(result);
         }
 
         [Fact]
-        public void CreateDecid_Returns201Created_WhenValidObjectSubmitted()
+        public void CreateAdmin_Returns201Created_WhenValidObjectSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetDecid("1"))
                 .Returns(new Decid
                 {
@@ -223,20 +223,20 @@ namespace Tests
                     EtatDecid = "NULL",
                     PwdDecid = "PWD"
                 });
-            var controller = new AdminController(mockRepo.Object, mapper);
+            var controller = new AdminController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.CreateDecid(new DecidCreateDto { });
+            var result = controller.CreateAdmin(new AdminCreateDto());
 
             //Assert
             Assert.IsType<CreatedAtRouteResult>(result.Result);
         }
 
         [Fact]
-        public void UpdateDecid_Returns204NoContent_WhenValidObjectSubmitted()
+        public void UpdateAdmin_Returns204NoContent_WhenValidObjectSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetDecid("1"))
                 .Returns(new Decid
                 {
@@ -246,24 +246,24 @@ namespace Tests
                     EtatDecid = "NULL",
                     PwdDecid = "PWD"
                 });
-            var controller = new AdminController(mockRepo.Object, mapper);
+            var controller = new AdminController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.UpdateDecid("1", new DecidUpdateDto { });
+            var result = controller.UpdateAdmin("1", new AdminUpdateDto());
 
             //Assert
             Assert.IsType<NoContentResult>(result);
         }
 
         [Fact]
-        public void UpdateDecid_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
+        public void UpdateAdmin_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetDecid("0")).Returns(() => null);
-            var controller = new AdminController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetDecid("0")).Returns(() => null);
+            var controller = new AdminController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.UpdateDecid("0", new DecidUpdateDto { });
+            var result = controller.UpdateAdmin("0", new AdminUpdateDto());
 
             //Assert
             Assert.IsType<NotFoundResult>(result);
@@ -273,26 +273,24 @@ namespace Tests
         public void PartialDecidUpdate_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetDecid("0")).Returns(() => null);
-            var controller = new AdminController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetDecid("0")).Returns(() => null);
+            var controller = new AdminController(_mockRepo.Object, _mapper);
 
             //Act
             var result =
                 controller
-                    .PartialDecidUpdate("0",
-                    new Microsoft.AspNetCore.JsonPatch.JsonPatchDocument<DecidUpdateDto
-                    >
-                    { });
+                    .PartialAdminUpdate("0",
+                    new JsonPatchDocument<AdminUpdateDto>());
 
             //Assert
             Assert.IsType<NotFoundResult>(result);
         }
 
         [Fact]
-        public void DeleteDecid_Returns204NoContent_WhenValidResourceIDSubmitted()
+        public void DeleteAdmin_Returns204NoContent_WhenValidResourceIDSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetDecid("1"))
                 .Returns(new Decid
                 {
@@ -302,24 +300,24 @@ namespace Tests
                     EtatDecid = "NULL",
                     PwdDecid = "PWD"
                 });
-            var controller = new AdminController(mockRepo.Object, mapper);
+            var controller = new AdminController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.DeleteDecid("1");
+            var result = controller.DeleteAdmin("1");
 
             //Assert
             Assert.IsType<NoContentResult>(result);
         }
 
         [Fact]
-        public void DeleteDecid_Returns_404NotFound_WhenNonExistentResourceIDSubmitted()
+        public void DeleteAdmin_Returns_404NotFound_WhenNonExistentResourceIDSubmitted()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetDecid("0")).Returns(() => null);
-            var controller = new AdminController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetDecid("0")).Returns(() => null);
+            var controller = new AdminController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.DeleteDecid("0");
+            var result = controller.DeleteAdmin("0");
 
             //Assert
             Assert.IsType<NotFoundResult>(result);

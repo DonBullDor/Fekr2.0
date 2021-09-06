@@ -5,27 +5,6 @@ VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerApp", "ServerApp\ServerApp.csproj", "{BD9E1919-BEC1-44BF-8099-816AB95379F0}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ClientApp", "ClientApp\", "{2172BE07-8D87-4B11-A553-22FFA71B11DC}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_51328"
-		Debug.AspNetCompiler.PhysicalPath = "ClientApp\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51328\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_51328"
-		Release.AspNetCompiler.PhysicalPath = "ClientApp\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51328\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "51328"
-		SlnRelativePath = "ClientApp\"
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "..\Domain\Data.csproj", "{9195FD56-586B-4340-B623-5C02CB1741CF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "..\Data\Domain.csproj", "{EB579F0D-AC1E-41B2-BC96-4BDF540C7739}"
@@ -44,10 +23,6 @@ Global
 		{BD9E1919-BEC1-44BF-8099-816AB95379F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD9E1919-BEC1-44BF-8099-816AB95379F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD9E1919-BEC1-44BF-8099-816AB95379F0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2172BE07-8D87-4B11-A553-22FFA71B11DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2172BE07-8D87-4B11-A553-22FFA71B11DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2172BE07-8D87-4B11-A553-22FFA71B11DC}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{2172BE07-8D87-4B11-A553-22FFA71B11DC}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{9195FD56-586B-4340-B623-5C02CB1741CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9195FD56-586B-4340-B623-5C02CB1741CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9195FD56-586B-4340-B623-5C02CB1741CF}.Release|Any CPU.ActiveCfg = Release|Any CPU

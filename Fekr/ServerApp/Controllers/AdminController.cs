@@ -1,13 +1,9 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using Data;
-using Data.Decids;
+using Data.Admins;
 using Domain.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using ServerApp.Helpers.Admin;
-using ServerApp.Models;
-using ServerApp.Services;
 using Service.Repository.Decids;
 
 namespace ServerApp.Controllers
@@ -28,87 +24,87 @@ namespace ServerApp.Controllers
 
         // GET: api/Decids
         [HttpGet]
-        public ActionResult<IEnumerable<DecidReadDto>> GetAllDecids()
+        public ActionResult<IEnumerable<AdminReadDto>> GetAllAdmins()
         {
-            var decids = _repository.GetAllDecids();
-            return Ok(_mapper.Map<IEnumerable<DecidReadDto>>(decids));
+            var admins = _repository.GetAllDecids();
+            return Ok(_mapper.Map<IEnumerable<AdminReadDto>>(admins));
         }
 
         // GET: api/Decids/5
-        [HttpGet("{id}", Name = "GetDecid")]
-        public ActionResult<DecidReadDto> GetDecid(string id)
+        [HttpGet("{id}", Name = "GetAdmin")]
+        public ActionResult<AdminReadDto> GetAdmin(string id)
         {
-            var decid = _repository.GetDecid(id);
+            var admin = _repository.GetDecid(id);
 
-            if (decid == null)
+            if (admin == null)
             {
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<DecidReadDto>(decid));
+            return Ok(_mapper.Map<AdminReadDto>(admin));
         }
 
         [HttpPost]
-        public ActionResult<DecidReadDto>
-        CreateDecid(DecidCreateDto decidCreateDto)
+        public ActionResult<AdminReadDto>
+        CreateAdmin(AdminCreateDto adminCreateDto)
         {
-            var decidModel = _mapper.Map<Decid>(decidCreateDto);
-            _repository.CreateDecid (decidModel);
+            var adminModel = _mapper.Map<Decid>(adminCreateDto);
+            _repository.CreateDecid(adminModel);
             _repository.SaveChanges();
-            var decidReadDto = _mapper.Map<DecidReadDto>(decidModel);
-            return CreatedAtRoute(nameof(GetDecid),
-            new { Id = decidReadDto.IdDecid },
-            decidReadDto);
+            var adminReadDto = _mapper.Map<AdminReadDto>(adminModel);
+            return CreatedAtRoute(nameof(GetAdmin),
+            new { Id = adminReadDto.IdDecid },
+            adminReadDto);
         }
 
         [HttpPut("{id}")]
         public ActionResult
-        UpdateDecid(string id, DecidUpdateDto decidUpdateDto)
+        UpdateAdmin(string id, AdminUpdateDto adminUpdateDto)
         {
-            var decidModelFromRepo = _repository.GetDecid(id);
-            if (decidModelFromRepo == null)
+            var adminModelFromRepo = _repository.GetDecid(id);
+            if (adminModelFromRepo == null)
             {
                 return NotFound();
             }
-            _mapper.Map (decidUpdateDto, decidModelFromRepo);
-            _repository.UpdateDecid (decidModelFromRepo);
+            _mapper.Map (adminUpdateDto, adminModelFromRepo);
+            _repository.UpdateDecid (adminModelFromRepo);
             _repository.SaveChanges();
             return NoContent();
         }
 
         [HttpPatch("{id}")]
         public ActionResult
-        PartialDecidUpdate(
+        PartialAdminUpdate(
             string id,
-            JsonPatchDocument<DecidUpdateDto> patchDoc
+            JsonPatchDocument<AdminUpdateDto> patchDoc
         )
         {
-            var decidModelFromRepo = _repository.GetDecid(id);
-            if (decidModelFromRepo == null)
+            var adminModelFromRepo = _repository.GetDecid(id);
+            if (adminModelFromRepo == null)
             {
                 return NotFound();
             }
-            var decidToPatch = _mapper.Map<DecidUpdateDto>(decidModelFromRepo);
-            patchDoc.ApplyTo (decidToPatch, ModelState);
-            if (!TryValidateModel(decidToPatch))
+            var adminToPatch = _mapper.Map<AdminUpdateDto>(adminModelFromRepo);
+            patchDoc.ApplyTo (adminToPatch, ModelState);
+            if (!TryValidateModel(adminToPatch))
             {
                 return ValidationProblem(ModelState);
             }
-            _mapper.Map (decidToPatch, decidModelFromRepo);
-            _repository.UpdateDecid (decidModelFromRepo);
+            _mapper.Map (adminToPatch, adminModelFromRepo);
+            _repository.UpdateDecid (adminModelFromRepo);
             _repository.SaveChanges();
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public ActionResult DeleteDecid(string id)
+        public ActionResult DeleteAdmin(string id)
         {
-            var decidModelFromRepo = _repository.GetDecid(id);
-            if (decidModelFromRepo == null)
+            var adminModelFromRepo = _repository.GetDecid(id);
+            if (adminModelFromRepo == null)
             {
                 return NotFound();
             }
-            _repository.DeleteDecid (decidModelFromRepo);
+            _repository.DeleteDecid (adminModelFromRepo);
             _repository.SaveChanges();
             return NoContent();
         }

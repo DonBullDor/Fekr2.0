@@ -23,15 +23,15 @@ namespace ServerApp.Controllers
 
         // GET: api/NotesApi
         [HttpGet]
-        public ActionResult<IEnumerable<NoteReadDto>> GetAllEspNotes()
+        public ActionResult<IEnumerable<NoteReadDto>> GetAllNotes()
         {
             var modules = _repository.GetAllNotes();
             return Ok(_mapper.Map<IEnumerable<NoteReadDto>>(modules));
         }
 
         // GET: api/NotesApi/5
-        [HttpGet("{id}", Name = "GetNote")]
-        public ActionResult<NoteReadDto> GetNote(string id)
+        [HttpGet("{id}", Name = "GetNotesById")]
+        public ActionResult<NoteReadDto> GetNotesById(string id)
         {
             var espNote = _repository.GetNotesById(id);
 
@@ -44,18 +44,18 @@ namespace ServerApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult<NoteReadDto> CreateNote(NoteCreateDto moduleCreateDto)
+        public ActionResult<NoteReadDto> CreateNotes(NoteCreateDto moduleCreateDto)
         {
             var moduleModel = _mapper.Map<ANote>(moduleCreateDto);
             _repository.CreateNotes(moduleModel);
             _repository.SaveChanges();
             var moduleReadDto = _mapper.Map<NoteReadDto>(moduleModel);
-            return CreatedAtRoute(nameof(GetNote),
+            return CreatedAtRoute(nameof(GetNotesById),
             new { Id = moduleReadDto.IdEt }, moduleReadDto);
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateNote(string id, NoteUpdateDto moduleUpdateDto)
+        public ActionResult UpdateNotes(string id, NoteUpdateDto moduleUpdateDto)
         {
             var moduleModelFromRepo = _repository.GetNotesById(id);
             if (moduleModelFromRepo == null)
@@ -88,8 +88,21 @@ namespace ServerApp.Controllers
             return NoContent();
         }
 
+        public ActionResult PartialNotesUpdate(string id, JsonPatchDocument<NoteUpdateDto> patchDoc)
+        {
+            var notesModelFromRepo = _repository.GetNotesById(id);
+            if (notesModelFromRepo == null) return NotFound();
+            var notesToPatch = _mapper.Map<NoteUpdateDto>(notesModelFromRepo);
+            patchDoc.ApplyTo(notesToPatch, ModelState);
+            if (!TryValidateModel(notesToPatch)) return ValidationProblem(ModelState);
+            _mapper.Map(notesToPatch, notesModelFromRepo);
+            _repository.UpdateNotes(notesModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
+        
         [HttpDelete("{id}")]
-        public ActionResult DeleteNote(string id)
+        public ActionResult DeleteNotes(string id)
         {
             var moduleModelFromRepo = _repository.GetNotesById(id);
             if (moduleModelFromRepo == null)

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using Data;
 using Data.Etudiant;
 using Domain.Models;
@@ -7,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Service.IConfiguration;
 using Service.Repository;
-using System.Collections.Generic;
 
 namespace ServerApp.Controllers
 {
@@ -15,20 +15,18 @@ namespace ServerApp.Controllers
     [ApiController]
     public class EtudiantsController : ControllerBase
     {
-        private readonly IEtudiantApiRepo _repository;
-        private readonly IMapper _mapper;
-        private IUnitOfWork _unitOfWork;
         private readonly ILogger<EtudiantsController> _logger;
+        private readonly IMapper _mapper;
+        private readonly IEtudiantApiRepo _repository;
+        private IUnitOfWork _unitOfWork;
 
         public EtudiantsController(
-            //IEtudiantApiRepo repository,
-            IUnitOfWork unitOfWork,
-            IMapper mapper, 
-            ILogger<EtudiantsController> logger)
+            IEtudiantApiRepo repository,
+            //IUnitOfWork unitOfWork,
+            IMapper mapper)
         {
-            //_repository = repository;
-            _unitOfWork = unitOfWork;
-            _logger = logger;
+            _repository = repository;
+            //_unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
@@ -36,21 +34,18 @@ namespace ServerApp.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<EtudiantReadDto>> GetAllEspEtudiants()
         {
-            //var etudiants = _repository.GetAllEtudiant();
-            var etudiants = _unitOfWork.Etudiants.All();
-            //return Ok(_mapper.Map<IEnumerable<EtudiantReadDto>>(etudiants));
-            return Ok(etudiants);
+            var etudiants = _repository.GetAllEtudiant();
+            //var etudiants = _unitOfWork.Etudiants.All();
+            return Ok(_mapper.Map<IEnumerable<EtudiantReadDto>>(etudiants));
+            //return Ok(etudiants);
         }
-        /*
+
         // GET: api/EtudiantsApi/5
-        [HttpGet("{id}", Name ="GetEtudiant")]
+        [HttpGet("{id}", Name = "GetEtudiant")]
         public ActionResult<EtudiantReadDto> GetEtudiant(string id)
         {
             var espEtudiant = _repository.GetEtudiant(id);
-            if (espEtudiant == null)
-            {
-                return NotFound();
-            }
+            if (espEtudiant == null) return NotFound();
             return Ok(_mapper.Map<EtudiantReadDto>(espEtudiant));
         }
 
@@ -62,17 +57,14 @@ namespace ServerApp.Controllers
             _repository.SaveChanges();
             var etudiantReadDto = _mapper.Map<EtudiantReadDto>(etudiantModel);
             return CreatedAtRoute(nameof(GetEtudiant),
-            new { Id = etudiantReadDto.IdEt }, etudiantReadDto);
+                new {Id = etudiantReadDto.IdEt}, etudiantReadDto);
         }
 
         [HttpPut("{id}")]
         public ActionResult UpdateEtudiant(string id, EtudiantUpdateDto etudiantUpdateDto)
         {
             var etudiantModelFromRepo = _repository.GetEtudiant(id);
-            if (etudiantModelFromRepo == null)
-            {
-                return NotFound();
-            }
+            if (etudiantModelFromRepo == null) return NotFound();
             _mapper.Map(etudiantUpdateDto, etudiantModelFromRepo);
             _repository.UpdateEtudiant(etudiantModelFromRepo);
             _repository.SaveChanges();
@@ -83,16 +75,10 @@ namespace ServerApp.Controllers
         public ActionResult PartialEtudiantUpdate(string id, JsonPatchDocument<EtudiantUpdateDto> patchDoc)
         {
             var etudiantModelFromRepo = _repository.GetEtudiant(id);
-            if (etudiantModelFromRepo == null)
-            {
-                return NotFound();
-            }
+            if (etudiantModelFromRepo == null) return NotFound();
             var etudiantToPatch = _mapper.Map<EtudiantUpdateDto>(etudiantModelFromRepo);
             patchDoc.ApplyTo(etudiantToPatch, ModelState);
-            if (!TryValidateModel(etudiantToPatch))
-            {
-                return ValidationProblem(ModelState);
-            }
+            if (!TryValidateModel(etudiantToPatch)) return ValidationProblem(ModelState);
             _mapper.Map(etudiantToPatch, etudiantModelFromRepo);
             _repository.UpdateEtudiant(etudiantModelFromRepo);
             _repository.SaveChanges();
@@ -104,14 +90,10 @@ namespace ServerApp.Controllers
         public ActionResult DeleteEtudiant(string id)
         {
             var etudiantModelFromRepo = _repository.GetEtudiant(id);
-            if (etudiantModelFromRepo == null)
-            {
-                return NotFound();
-            }
+            if (etudiantModelFromRepo == null) return NotFound();
             _repository.DeleteEtudiant(etudiantModelFromRepo);
             _repository.SaveChanges();
             return NoContent();
         }
-        */
     }
 }

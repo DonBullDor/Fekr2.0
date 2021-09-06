@@ -2,10 +2,10 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Domain.Models;
+
 #nullable disable
 
-namespace Data
+namespace Domain.Models
 {
     public partial class Oracle1Context : DbContext
     {
@@ -4484,7 +4484,7 @@ namespace Data
 
             modelBuilder.Entity<EspEnseignant>(entity =>
             {
-                entity.HasKey(x=>x.IdEns);
+                entity.HasNoKey();
 
                 entity.ToTable("ESP_ENSEIGNANT");
 

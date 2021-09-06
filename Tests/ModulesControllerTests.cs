@@ -15,30 +15,30 @@ namespace Tests
 {
     public class ModulesControllerTests : IDisposable
     {
-        private Mock<IModuleApiRepo> mockRepo;
-        private ModuleProfile realProfile;
-        private MapperConfiguration configuration;
-        private IMapper mapper;
+        private Mock<IModuleApiRepo> _mockRepo;
+        private ModuleProfile _realProfile;
+        private MapperConfiguration _configuration;
+        private IMapper _mapper;
 
         public ModulesControllerTests()
         {
-            mockRepo = new Mock<IModuleApiRepo>();
-            realProfile = new ModuleProfile();
-            configuration =
-                new MapperConfiguration(cfg => cfg.AddProfile(realProfile));
-            mapper = new Mapper(configuration);
+            _mockRepo = new Mock<IModuleApiRepo>();
+            _realProfile = new ModuleProfile();
+            _configuration =
+                new MapperConfiguration(cfg => cfg.AddProfile(_realProfile));
+            _mapper = new Mapper(_configuration);
         }
 
         public void Dispose()
         {
-            mockRepo = null;
-            mapper = null;
-            configuration = null;
-            realProfile = null;
+            _mockRepo = null;
+            _mapper = null;
+            _configuration = null;
+            _realProfile = null;
         }
 
         [Fact]
-        public void GetModuleItems_ReturnsZeroItems_WhenDBIsEmpty()
+        public void GetModule_ReturnsZeroModule_WhenDBIsEmpty()
         {
             //Arrange
             var mockRepo = new Mock<IModuleApiRepo>();
@@ -78,10 +78,10 @@ namespace Tests
         public void GetAllModules_ReturnsOneItem_WhenDBHasOneResource()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetAllModules())
                 .Returns(GetModules(1));
-            var controller = new ModulesController(mockRepo.Object, mapper);
+            var controller = new ModulesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetAllEspModules();
@@ -96,10 +96,10 @@ namespace Tests
         public void GetAllModules_Returns200OK_WhenDBHasOneResource()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetAllModules())
                 .Returns(GetModules(1));
-            var controller = new ModulesController(mockRepo.Object, mapper);
+            var controller = new ModulesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetAllEspModules();
@@ -112,10 +112,10 @@ namespace Tests
         public void GetAllModules_ReturnsCorrectType_WhenDBHasOneResource()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetAllModules())
                 .Returns(GetModules(1));
-            var controller = new ModulesController(mockRepo.Object, mapper);
+            var controller = new ModulesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetAllEspModules(); //Assert
@@ -128,8 +128,8 @@ namespace Tests
         public void GetModuleByID_Returns404NotFound_WhenNonExistentIDProvided()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetModule("0")).Returns(() => null);
-            var controller = new ModulesController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetModule("0")).Returns(() => null);
+            var controller = new ModulesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetModule("1");
@@ -142,7 +142,7 @@ namespace Tests
         public void GetModuleByID_Returns200OK__WhenValidIDProvided()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetModule("1"))
                 .Returns(new EspModule
                 {
@@ -150,7 +150,7 @@ namespace Tests
                     Designation = "FKR-TEST2",
                     Etat = "A"
                 });
-            var controller = new ModulesController(mockRepo.Object, mapper);
+            var controller = new ModulesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetModule("1");
@@ -163,7 +163,7 @@ namespace Tests
         public void GetModuleByID_Returns200OK__WhenValidIDProvided2()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetModule("1"))
                 .Returns(new EspModule
                 {
@@ -171,7 +171,7 @@ namespace Tests
                     Designation = "FKR-TEST2",
                     Etat = "A"
                 });
-            var controller = new ModulesController(mockRepo.Object, mapper);
+            var controller = new ModulesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetModule("1");
@@ -184,7 +184,7 @@ namespace Tests
         public void CreateModule_ReturnsCorrectResourceType_WhenValidObjectSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetModule("1"))
                 .Returns(new EspModule
                 {
@@ -192,7 +192,7 @@ namespace Tests
                     Designation = "FKR-TEST2",
                     Etat = "A"
                 });
-            var controller = new ModulesController(mockRepo.Object, mapper);
+            var controller = new ModulesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.CreateModule(new ModuleCreateDto { });
@@ -205,7 +205,7 @@ namespace Tests
         public void CreateModule_Returns201Created_WhenValidObjectSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetModule("1"))
                 .Returns(new EspModule
                 {
@@ -213,7 +213,7 @@ namespace Tests
                     Designation = "FKR-TEST2",
                     Etat = "A"
                 });
-            var controller = new ModulesController(mockRepo.Object, mapper);
+            var controller = new ModulesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.CreateModule(new ModuleCreateDto { });
@@ -226,7 +226,7 @@ namespace Tests
         public void UpdateModule_Returns204NoContent_WhenValidObjectSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetModule("1"))
                 .Returns(new EspModule
                 {
@@ -234,7 +234,7 @@ namespace Tests
                     Designation = "FKR-TEST2",
                     Etat = "A"
                 });
-            var controller = new ModulesController(mockRepo.Object, mapper);
+            var controller = new ModulesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.UpdateModule("1", new ModuleUpdateDto { });
@@ -247,8 +247,8 @@ namespace Tests
         public void UpdateModule_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetModule("0")).Returns(() => null);
-            var controller = new ModulesController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetModule("0")).Returns(() => null);
+            var controller = new ModulesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.UpdateModule("0", new ModuleUpdateDto { });
@@ -261,8 +261,8 @@ namespace Tests
         public void PartialModuleUpdate_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetModule("0")).Returns(() => null);
-            var controller = new ModulesController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetModule("0")).Returns(() => null);
+            var controller = new ModulesController(_mockRepo.Object, _mapper);
 
             //Act
             var result =
@@ -280,7 +280,7 @@ namespace Tests
         public void DeleteModule_Returns204NoContent_WhenValidResourceIDSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetModule("1"))
                 .Returns(new EspModule
                 {
@@ -288,7 +288,7 @@ namespace Tests
                     Designation = "FKR-TEST2",
                     Etat = "A"
                 });
-            var controller = new ModulesController(mockRepo.Object, mapper);
+            var controller = new ModulesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.DeleteModule("1");
@@ -301,8 +301,8 @@ namespace Tests
         public void DeleteModule_Returns_404NotFound_WhenNonExistentResourceIDSubmitted()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetModule("0")).Returns(() => null);
-            var controller = new ModulesController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetModule("0")).Returns(() => null);
+            var controller = new ModulesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.DeleteModule("0");

@@ -12,9 +12,8 @@ namespace ServerApp.Helpers.Admin
 {
     public class AdminJwtMiddleware
     {
-        private readonly RequestDelegate _next;
-
         private readonly AppSettings _appSettings;
+        private readonly RequestDelegate _next;
 
         public AdminJwtMiddleware(
             RequestDelegate next,
@@ -26,7 +25,7 @@ namespace ServerApp.Helpers.Admin
         }
 
         public async Task
-        Invoke(HttpContext context, IAdminLoginService userService)
+            Invoke(HttpContext context, IAdminLoginService userService)
         {
             var token =
                 context
@@ -53,15 +52,16 @@ namespace ServerApp.Helpers.Admin
                 var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
                 tokenHandler
                     .ValidateToken(token,
-                    new TokenValidationParameters {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(key),
-                        ValidateIssuer = false,
-                        ValidateAudience = false,
-                        // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
-                        ClockSkew = TimeSpan.Zero
-                    },
-                    out SecurityToken validatedToken);
+                        new TokenValidationParameters
+                        {
+                            ValidateIssuerSigningKey = true,
+                            IssuerSigningKey = new SymmetricSecurityKey(key),
+                            ValidateIssuer = false,
+                            ValidateAudience = false,
+                            // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
+                            ClockSkew = TimeSpan.Zero
+                        },
+                        out var validatedToken);
 
                 var jwtToken = (JwtSecurityToken) validatedToken;
 

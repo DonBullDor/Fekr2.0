@@ -242,3 +242,4 @@ C:\Files\Workplace\PFE\Fekr 2.0\Fekr\Tests\obj\Debug\net5.0\ref\Tests.dll
 C:\Files\Workplace\PFE\Fekr 2.0\Fekr\Tests\obj\Debug\net5.0\Tests.pdb
 C:\Files\Workplace\PFE\Fekr 2.0\Fekr\Tests\obj\Debug\net5.0\Tests.genruntimeconfig.cache
 C:\Files\Workplace\PFE\Fekr 2.0\Fekr\Tests\bin\Debug\net5.0\BCrypt.Net-Next.dll
+C:\Files\Workplace\PFE\Fekr 2.0\Fekr\Tests\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -101,5 +101,12 @@ namespace ServerApp.Controllers
             _repository.SaveChanges();
             return NoContent();
         }
+
+        [HttpGet("{classe}", Name ="GetModulesByClasse")]
+        public ActionResult GetModuleByClasseAction(string classe)
+        {
+            var moduleByClasse = _repository.GetModulesByClasse(classe);
+            return Ok(moduleByClasse);
+        }
     }
 }

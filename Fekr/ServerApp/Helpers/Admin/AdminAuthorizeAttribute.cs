@@ -14,12 +14,10 @@ namespace ServerApp.Helpers.Admin
             var user = (Decid) context.HttpContext.Items["Admin"];
 
             if (user == null)
-            {
                 // not logged in
                 context.Result =
-                    new JsonResult(new { message = "Unauthorized" })
-                    { StatusCode = StatusCodes.Status401Unauthorized };
-            }
+                    new JsonResult(new {message = "Unauthorized"})
+                        {StatusCode = StatusCodes.Status401Unauthorized};
         }
     }
 }

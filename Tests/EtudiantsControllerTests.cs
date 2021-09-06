@@ -16,30 +16,30 @@ namespace Tests
 {
     public class EtudiantsControllerTests : IDisposable
     {
-        private Mock<IEtudiantApiRepo> mockRepo;
-        private EtudiantProfile realProfile;
-        private MapperConfiguration configuration;
-        private IMapper mapper;
+        private Mock<IEtudiantApiRepo> _mockRepo;
+        private EtudiantProfile _realProfile;
+        private MapperConfiguration _configuration;
+        private IMapper _mapper;
 
         public EtudiantsControllerTests()
         {
-            mockRepo = new Mock<IEtudiantApiRepo>();
-            realProfile = new EtudiantProfile();
-            configuration =
-                new MapperConfiguration(cfg => cfg.AddProfile(realProfile));
-            mapper = new Mapper(configuration);
+            _mockRepo = new Mock<IEtudiantApiRepo>();
+            _realProfile = new EtudiantProfile();
+            _configuration =
+                new MapperConfiguration(cfg => cfg.AddProfile(_realProfile));
+            _mapper = new Mapper(_configuration);
         }
 
         public void Dispose()
         {
-            mockRepo = null;
-            mapper = null;
-            configuration = null;
-            realProfile = null;
+            _mockRepo = null;
+            _mapper = null;
+            _configuration = null;
+            _realProfile = null;
         }
 
         [Fact]
-        public void GetEtudiantItems_ReturnsZeroItems_WhenDBIsEmpty()
+        public void GetEtudiant_ReturnsZeroEtudiant_WhenDBIsEmpty()
         {
             //Arrange
             var mockRepo = new Mock<IEtudiantApiRepo>();
@@ -72,6 +72,7 @@ namespace Tests
                         Password = "desc"
                     });
             }
+
             return commands;
         }
 
@@ -79,10 +80,10 @@ namespace Tests
         public void GetAllEtudiants_ReturnsOneItem_WhenDBHasOneResource()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetAllEtudiant())
                 .Returns(GetEtudiants(1));
-            var controller = new EtudiantsController(mockRepo.Object, mapper);
+            var controller = new EtudiantsController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetAllEspEtudiants();
@@ -97,10 +98,10 @@ namespace Tests
         public void GetAllEtudiants_Returns200OK_WhenDBHasOneResource()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetAllEtudiant())
                 .Returns(GetEtudiants(1));
-            var controller = new EtudiantsController(mockRepo.Object, mapper);
+            var controller = new EtudiantsController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetAllEspEtudiants();
@@ -113,10 +114,10 @@ namespace Tests
         public void GetAllEtudiants_ReturnsCorrectType_WhenDBHasOneResource()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetAllEtudiant())
                 .Returns(GetEtudiants(1));
-            var controller = new EtudiantsController(mockRepo.Object, mapper);
+            var controller = new EtudiantsController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetAllEspEtudiants(); //Assert
@@ -129,8 +130,8 @@ namespace Tests
         public void GetEtudiantByID_Returns404NotFound_WhenNonExistentIDProvided()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetEtudiant("0")).Returns(() => null);
-            var controller = new EtudiantsController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetEtudiant("0")).Returns(() => null);
+            var controller = new EtudiantsController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetEtudiant("1");
@@ -143,7 +144,7 @@ namespace Tests
         public void GetEtudiantByID_Returns200OK__WhenValidIDProvided()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetEtudiant("1"))
                 .Returns(new EspEtudiant
                 {
@@ -151,7 +152,7 @@ namespace Tests
                     NomEt = "Test",
                     Password = "desc"
                 });
-            var controller = new EtudiantsController(mockRepo.Object, mapper);
+            var controller = new EtudiantsController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetEtudiant("1");
@@ -164,7 +165,7 @@ namespace Tests
         public void GetEtudiantByID_Returns200OK__WhenValidIDProvided2()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetEtudiant("1"))
                 .Returns(new EspEtudiant
                 {
@@ -172,7 +173,7 @@ namespace Tests
                     NomEt = "Test",
                     Password = "desc"
                 });
-            var controller = new EtudiantsController(mockRepo.Object, mapper);
+            var controller = new EtudiantsController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetEtudiant("1");
@@ -185,7 +186,7 @@ namespace Tests
         public void CreateEtudiant_ReturnsCorrectResourceType_WhenValidObjectSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetEtudiant("1"))
                 .Returns(new EspEtudiant
                 {
@@ -193,7 +194,7 @@ namespace Tests
                     NomEt = "Test",
                     Password = "desc"
                 });
-            var controller = new EtudiantsController(mockRepo.Object, mapper);
+            var controller = new EtudiantsController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.CreateEtudiant(new EtudiantCreateDto { });
@@ -206,7 +207,7 @@ namespace Tests
         public void CreateEtudiant_Returns201Created_WhenValidObjectSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetEtudiant("1"))
                 .Returns(new EspEtudiant
                 {
@@ -214,7 +215,7 @@ namespace Tests
                     NomEt = "Test",
                     Password = "desc"
                 });
-            var controller = new EtudiantsController(mockRepo.Object, mapper);
+            var controller = new EtudiantsController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.CreateEtudiant(new EtudiantCreateDto { });
@@ -227,7 +228,7 @@ namespace Tests
         public void UpdateEtudiant_Returns204NoContent_WhenValidObjectSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetEtudiant("1"))
                 .Returns(new EspEtudiant
                 {
@@ -235,7 +236,7 @@ namespace Tests
                     NomEt = "Test",
                     Password = "desc"
                 });
-            var controller = new EtudiantsController(mockRepo.Object, mapper);
+            var controller = new EtudiantsController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.UpdateEtudiant("1", new EtudiantUpdateDto { });
@@ -248,8 +249,8 @@ namespace Tests
         public void UpdateEtudiant_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetEtudiant("0")).Returns(() => null);
-            var controller = new EtudiantsController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetEtudiant("0")).Returns(() => null);
+            var controller = new EtudiantsController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.UpdateEtudiant("0", new EtudiantUpdateDto { });
@@ -262,16 +263,16 @@ namespace Tests
         public void PartialEtudiantUpdate_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetEtudiant("0")).Returns(() => null);
-            var controller = new EtudiantsController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetEtudiant("0")).Returns(() => null);
+            var controller = new EtudiantsController(_mockRepo.Object, _mapper);
 
             //Act
             var result =
                 controller
                     .PartialEtudiantUpdate("0",
-                    new Microsoft.AspNetCore.JsonPatch.JsonPatchDocument<EtudiantUpdateDto
-                    >
-                    { });
+                        new Microsoft.AspNetCore.JsonPatch.JsonPatchDocument<EtudiantUpdateDto
+                            >
+                            { });
 
             //Assert
             Assert.IsType<NotFoundResult>(result);
@@ -281,7 +282,7 @@ namespace Tests
         public void DeleteEtudiant_Returns204NoContent_WhenValidResourceIDSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetEtudiant("1"))
                 .Returns(new EspEtudiant
                 {
@@ -289,7 +290,7 @@ namespace Tests
                     NomEt = "Test",
                     Password = "desc"
                 });
-            var controller = new EtudiantsController(mockRepo.Object, mapper);
+            var controller = new EtudiantsController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.DeleteEtudiant("1");
@@ -302,8 +303,8 @@ namespace Tests
         public void DeleteEtudiant_Returns_404NotFound_WhenNonExistentResourceIDSubmitted()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetEtudiant("0")).Returns(() => null);
-            var controller = new EtudiantsController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetEtudiant("0")).Returns(() => null);
+            var controller = new EtudiantsController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.DeleteEtudiant("0");

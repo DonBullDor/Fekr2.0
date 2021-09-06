@@ -1,40 +1,41 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using AutoMapper;
+using Data;
+using Data.Societe;
 using Domain.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using Data;
 using ServerApp.Controllers;
 using ServerApp.Profiles;
 using Service.Repository.Societes;
-using System;
-using System.Collections.Generic;
 using Xunit;
-using Data.Societes;
 
 namespace Tests
 {
     public class SocietiesControllerTests : IDisposable
     {
-        private Mock<ISocietesApiRepo> mockRepo;
-        private SocieteProfile realProfile;
-        private MapperConfiguration configuration;
-        private IMapper mapper;
+        private Mock<ISocietesApiRepo> _mockRepo;
+        private SocieteProfile _realProfile;
+        private MapperConfiguration _configuration;
+        private IMapper _mapper;
 
         public SocietiesControllerTests()
         {
-            mockRepo = new Mock<ISocietesApiRepo>();
-            realProfile = new SocieteProfile();
-            configuration =
-                new MapperConfiguration(cfg => cfg.AddProfile(realProfile));
-            mapper = new Mapper(configuration);
+            _mockRepo = new Mock<ISocietesApiRepo>();
+            _realProfile = new SocieteProfile();
+            _configuration =
+                new MapperConfiguration(cfg => cfg.AddProfile(_realProfile));
+            _mapper = new Mapper(_configuration);
         }
 
         public void Dispose()
         {
-            mockRepo = null;
-            mapper = null;
-            configuration = null;
-            realProfile = null;
+            _mockRepo = null;
+            _mapper = null;
+            _configuration = null;
+            _realProfile = null;
         }
 
         [Fact]
@@ -78,10 +79,10 @@ namespace Tests
         public void GetAllSocietes_ReturnsOneItem_WhenDBHasOneResource()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetAllSocietes())
                 .Returns(GetSocietes(1));
-            var controller = new SocietesController(mockRepo.Object, mapper);
+            var controller = new SocietesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetAllSocietes();
@@ -96,10 +97,10 @@ namespace Tests
         public void GetAllSocietes_Returns200OK_WhenDBHasOneResource()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetAllSocietes())
                 .Returns(GetSocietes(1));
-            var controller = new SocietesController(mockRepo.Object, mapper);
+            var controller = new SocietesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetAllSocietes();
@@ -112,10 +113,10 @@ namespace Tests
         public void GetAllSocietes_ReturnsCorrectType_WhenDBHasOneResource()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetAllSocietes())
                 .Returns(GetSocietes(1));
-            var controller = new SocietesController(mockRepo.Object, mapper);
+            var controller = new SocietesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetAllSocietes(); //Assert
@@ -128,8 +129,8 @@ namespace Tests
         public void GetSocieteByID_Returns404NotFound_WhenNonExistentIDProvided()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetSociete("0")).Returns(() => null);
-            var controller = new SocietesController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetSociete("0")).Returns(() => null);
+            var controller = new SocietesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetSociete("1");
@@ -142,7 +143,7 @@ namespace Tests
         public void GetSocieteByID_Returns200OK__WhenValidIDProvided()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetSociete("1"))
                 .Returns(new Societe
                 {
@@ -150,7 +151,7 @@ namespace Tests
                     NomSoc = "ECOLE SECONDAIRE COLLEGE LYCEE TEST",
                     AnneeDeb = "2022"
                 });
-            var controller = new SocietesController(mockRepo.Object, mapper);
+            var controller = new SocietesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetSociete("1");
@@ -163,7 +164,7 @@ namespace Tests
         public void GetSocieteByID_Returns200OK__WhenValidIDProvided2()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetSociete("1"))
                 .Returns(new Societe
                 {
@@ -171,7 +172,7 @@ namespace Tests
                     NomSoc = "ECOLE SECONDAIRE COLLEGE LYCEE TEST",
                     AnneeDeb = "2022"
                 });
-            var controller = new SocietesController(mockRepo.Object, mapper);
+            var controller = new SocietesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.GetSociete("1");
@@ -184,7 +185,7 @@ namespace Tests
         public void CreateSociete_ReturnsCorrectResourceType_WhenValidObjectSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetSociete("1"))
                 .Returns(new Societe
                 {
@@ -192,10 +193,10 @@ namespace Tests
                     NomSoc = "ECOLE SECONDAIRE COLLEGE LYCEE TEST",
                     AnneeDeb = "2022"
                 });
-            var controller = new SocietesController(mockRepo.Object, mapper);
+            var controller = new SocietesController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.CreateSociete(new SocieteCreateDto { });
+            var result = controller.CreateSociete(new SocieteCreateDto());
 
             //Assert
             Assert.IsType<ActionResult<SocieteReadDto>>(result);
@@ -205,7 +206,7 @@ namespace Tests
         public void CreateSociete_Returns201Created_WhenValidObjectSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetSociete("1"))
                 .Returns(new Societe
                 {
@@ -213,10 +214,10 @@ namespace Tests
                     NomSoc = "ECOLE SECONDAIRE COLLEGE LYCEE TEST",
                     AnneeDeb = "2022"
                 });
-            var controller = new SocietesController(mockRepo.Object, mapper);
+            var controller = new SocietesController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.CreateSociete(new SocieteCreateDto { });
+            var result = controller.CreateSociete(new SocieteCreateDto());
 
             //Assert
             Assert.IsType<CreatedAtRouteResult>(result.Result);
@@ -226,7 +227,7 @@ namespace Tests
         public void UpdateSociete_Returns204NoContent_WhenValidObjectSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetSociete("1"))
                 .Returns(new Societe
                 {
@@ -234,10 +235,10 @@ namespace Tests
                     NomSoc = "ECOLE SECONDAIRE COLLEGE LYCEE TEST",
                     AnneeDeb = "2022"
                 });
-            var controller = new SocietesController(mockRepo.Object, mapper);
+            var controller = new SocietesController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.UpdateSociete("1", new SocieteUpdateDto { });
+            var result = controller.UpdateSociete("1", new SocieteUpdateDto());
 
             //Assert
             Assert.IsType<NoContentResult>(result);
@@ -247,11 +248,11 @@ namespace Tests
         public void UpdateSociete_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetSociete("0")).Returns(() => null);
-            var controller = new SocietesController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetSociete("0")).Returns(() => null);
+            var controller = new SocietesController(_mockRepo.Object, _mapper);
 
             //Act
-            var result = controller.UpdateSociete("0", new SocieteUpdateDto { });
+            var result = controller.UpdateSociete("0", new SocieteUpdateDto());
 
             //Assert
             Assert.IsType<NotFoundResult>(result);
@@ -261,16 +262,15 @@ namespace Tests
         public void PartialSocieteUpdate_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetSociete("0")).Returns(() => null);
-            var controller = new SocietesController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetSociete("0")).Returns(() => null);
+            var controller = new SocietesController(_mockRepo.Object, _mapper);
 
             //Act
             var result =
                 controller
                     .PartialSocieteUpdate("0",
-                    new Microsoft.AspNetCore.JsonPatch.JsonPatchDocument<SocieteUpdateDto
-                    >
-                    { });
+                    new JsonPatchDocument<SocieteUpdateDto
+                    >());
 
             //Assert
             Assert.IsType<NotFoundResult>(result);
@@ -280,7 +280,7 @@ namespace Tests
         public void DeleteSociete_Returns204NoContent_WhenValidResourceIDSubmitted()
         {
             //Arrange
-            mockRepo
+            _mockRepo
                 .Setup(repo => repo.GetSociete("1"))
                 .Returns(new Societe
                 {
@@ -288,7 +288,7 @@ namespace Tests
                     NomSoc = "ECOLE SECONDAIRE COLLEGE LYCEE TEST",
                     AnneeDeb = "2022"
                 });
-            var controller = new SocietesController(mockRepo.Object, mapper);
+            var controller = new SocietesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.DeleteSociete("1");
@@ -301,8 +301,8 @@ namespace Tests
         public void DeleteSociete_Returns_404NotFound_WhenNonExistentResourceIDSubmitted()
         {
             //Arrange
-            mockRepo.Setup(repo => repo.GetSociete("0")).Returns(() => null);
-            var controller = new SocietesController(mockRepo.Object, mapper);
+            _mockRepo.Setup(repo => repo.GetSociete("0")).Returns(() => null);
+            var controller = new SocietesController(_mockRepo.Object, _mapper);
 
             //Act
             var result = controller.DeleteSociete("0");

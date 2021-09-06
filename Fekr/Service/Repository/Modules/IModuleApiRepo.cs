@@ -10,6 +10,8 @@ namespace Service.Repository.Modules
 
         EspModule GetModule(string id);
 
+        IEnumerable<EspModule> GetModulesByClasse(string codeCl);
+
         void UpdateModule(EspModule espModule);
 
         void CreateModule(EspModule espModule);

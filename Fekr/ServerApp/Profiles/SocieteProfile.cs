@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Data;
-using Data.Societes;
+using Data.Societe;
 using Domain.Models;
 
 namespace ServerApp.Profiles

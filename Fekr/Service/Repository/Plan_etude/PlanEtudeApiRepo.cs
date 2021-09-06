@@ -36,9 +36,9 @@ namespace Service.Repository.Plan_etude
             return _context.EspModulePanierClasseSaiso.ToList();
         }
 
-        public EspModulePanierClasseSaiso GetPlanEtudeById(string planEtude)
+        public IEnumerable<EspModulePanierClasseSaiso> GetPlanEtudeById(string planEtude)
         {
-            return _context.EspModulePanierClasseSaiso.FirstOrDefault(p => p.CodeModule == planEtude);
+            return _context.EspModulePanierClasseSaiso.Where(p => p.CodeModule == planEtude).ToList();
         }
 
         public bool SaveChanges()
