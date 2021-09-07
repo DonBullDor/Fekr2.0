@@ -32,6 +32,14 @@ namespace ServerApp.Controllers
             return Ok(planEtudeEtudes);
         }
 
+        [Route("[action]/{codeClasse}")]
+        [HttpGet]
+        public ActionResult<IEnumerable<PlanEtudeReadDto>> GetAllPlanEtudeByClasse(string codeClasse)
+        {
+            var allPlanEtudeByClasse = _repository.GetAllPlanEtudeByClasse(codeClasse);
+            return Ok(_mapper.Map<IEnumerable<PlanEtudeReadDto>>(allPlanEtudeByClasse));
+        }
+
         [HttpGet("{id}", Name = "GetPlanEtude")]
         public ActionResult<PlanEtudeReadDto> GetPlanEtude(string id)
         {

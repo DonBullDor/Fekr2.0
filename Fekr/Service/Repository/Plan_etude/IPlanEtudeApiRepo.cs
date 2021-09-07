@@ -11,7 +11,11 @@ namespace Service.Repository.Plan_etude
         bool SaveChanges();
         IEnumerable<EspModulePanierClasseSaiso> GetAllPlanEtude();
 
-        IEnumerable<EspModulePanierClasseSaiso> GetPlanEtudeById(string planEtude);
+        EspModulePanierClasseSaiso GetPlanEtudeById(string codeClasse);
+        IEnumerable<EspModulePanierClasseSaiso> GetAllPlanEtudeByClasse(string classe);
+        IEnumerable<EspModulePanierClasseSaiso> GetAllPlanEtudeByModule(string codeModule);
+        IEnumerable<EspModulePanierClasseSaiso> GetAllPlanEtudeByEnseignant(string idEnseignant);
+        IEnumerable<EspModulePanierClasseSaiso> GetAllPlanEtudeByEtudiant(string idEtudiant);
 
         void UpdatePlanEtude(EspModulePanierClasseSaiso planEtude);
 
@@ -20,4 +24,3 @@ namespace Service.Repository.Plan_etude
         void DeletePlanEtude(EspModulePanierClasseSaiso planEtude);
     }
 }
-

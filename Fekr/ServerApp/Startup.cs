@@ -42,7 +42,7 @@ namespace ServerApp
             services.AddCors(options => 
             {
                 options.AddPolicy("AllowSpecificOrigin",
-                    builder => builder.WithOrigins("http://localhost:4200"));
+                    builder => builder.WithOrigins("*"));
             }
             );
             services.AddControllers().AddNewtonsoftJson(option =>
