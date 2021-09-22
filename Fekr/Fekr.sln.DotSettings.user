@@ -1,15 +1,19 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=029F59DA_002D3274_002D4110_002D9CB9_002D9A0B6D60D0E8_002Ff_003AEtudiantsControllerTests_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=40be5222_002D1e5e_002D4a48_002D833f_002D539004539718/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="NotesControllerTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=40be5222_002D1e5e_002D4a48_002D833f_002D539004539718/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="NotesControllerTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::029F59DA-3274-4110-9CB9-9A0B6D60D0E8::net5.0::Tests.NotesControllerTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::029F59DA-3274-4110-9CB9-9A0B6D60D0E8::net5.0::Tests.EmploiDuTempControllerTests.GetAllEmploi_ReturnsOneItem_WhenDBHasOneResource&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::029F59DA-3274-4110-9CB9-9A0B6D60D0E8::net5.0::Tests.EmploiDuTempControllerTests.GetAllEmploiDuTemps_Returns200OK_WhenDBHasOneResource&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::029F59DA-3274-4110-9CB9-9A0B6D60D0E8::net5.0::Tests.EmploiDuTempControllerTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c2b2db9d_002D0798_002D4690_002D8489_002Dba32bdcd8574/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="UpdateClasse_Returns404NotFound_WhenNonExistentResourceIDSubmitted" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c2b2db9d_002D0798_002D4690_002D8489_002Dba32bdcd8574/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="UpdateClasse_Returns404NotFound_WhenNonExistentResourceIDSubmitted" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::029F59DA-3274-4110-9CB9-9A0B6D60D0E8::net5.0::Tests.ClassesControllerTests.UpdateClasse_Returns404NotFound_WhenNonExistentResourceIDSubmitted&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::029F59DA-3274-4110-9CB9-9A0B6D60D0E8::net5.0::Tests.NotesControllerTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::029F59DA-3274-4110-9CB9-9A0B6D60D0E8::net5.0::Tests.AdminControllerTests.GetAllAdmins_ReturnsCorrectType_WhenDBHasOneResource&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::029F59DA-3274-4110-9CB9-9A0B6D60D0E8::net5.0::Tests.AdminControllerTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::029F59DA-3274-4110-9CB9-9A0B6D60D0E8::net5.0::Tests.EmploiDuTempControllerTests.GetAllEmploi_ReturnsOneItem_WhenDBHasOneResource&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

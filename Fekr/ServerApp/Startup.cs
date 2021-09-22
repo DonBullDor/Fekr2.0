@@ -16,6 +16,7 @@ using Service.IConfiguration;
 using Service.Repository;
 using Service.Repository.Classes;
 using Service.Repository.Decids;
+using Service.Repository.EmploiDuTemp;
 using Service.Repository.Enseignant;
 using Service.Repository.Etudiant;
 using Service.Repository.ModuleEtudiant;
@@ -83,7 +84,7 @@ namespace ServerApp
             services.AddScoped<IMoyenneApiRepo, MoyenneApiRepo>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IModuleEtudiant, ModuleEtudiantApiRepo>();
-
+            services.AddScoped<IEmploiDuTempRepo, EmploiDuTempRepo>();
         }
 
         // configure the HTTP request pipeline

@@ -35,7 +35,7 @@ namespace Service.Repository.Modules
         }
 
         public IEnumerable<EspModule> GetModulesByClasse(string codeCl){
-            return _context.EspModule.Where(module => module.EspModuleEtudiant.All(moduleEtudiant => moduleEtudiant.CodeCl == codeCl));
+            return _context.EspModule.Where(module => module.EspModuleEtudiant.All(p => p.CodeCl == codeCl));
         }
 
         public void CreateModule(EspModule espModule)
