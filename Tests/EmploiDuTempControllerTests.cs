@@ -40,7 +40,7 @@ namespace Tests
             _configuration = null;
             _realProfile = null;
         }
-
+/*
         [Fact]
         public void GetEmploiDuTemp_ReturnsZeroAdmins_WhenDBIsEmpty()
         {
@@ -61,7 +61,7 @@ namespace Tests
             //Assert
             Assert.IsType<OkObjectResult>(result.Result);
         }
-
+*/
         private static IEnumerable<EspEmploi> GetEmploiDuTemps(int num)
         {
             var commands = new List<EspEmploi>();
@@ -82,7 +82,7 @@ namespace Tests
 
             return commands;
         }
-
+/*
         [Fact]
         public void GetAllEmploi_ReturnsOneItem_WhenDBHasOneResource()
         {
@@ -99,7 +99,8 @@ namespace Tests
             var okResult = result.Result as OkObjectResult;
             if (okResult?.Value is List<EmploiDuTempReadDto> commands) Assert.Single((IEnumerable) commands);
         }
-
+        */
+/*
         [Fact]
         public void GetAllEmploiDuTemps_Returns200OK_WhenDBHasOneResource()
         {
@@ -115,7 +116,8 @@ namespace Tests
             //Assert
             Assert.IsType<OkObjectResult>(result.Result);
         }
-
+        */
+/*
         [Fact]
         public void GetAllEmploiDuTemps_ReturnsCorrectType_WhenDBHasOneResource()
         {
@@ -129,9 +131,9 @@ namespace Tests
             var result = controller.GetAll(); //Assert
             Assert.IsType<ActionResult<IEnumerable<EspEmploi>>>(result);
         }
-
+*/
         //flag
-
+        /*
         [Fact]
         public void GetEmploiDuTempByID_Returns404NotFound_WhenNonExistentIDProvided()
         {
@@ -145,7 +147,7 @@ namespace Tests
             //Assert
             Assert.IsType<NotFoundResult>(result.Result);
         }
-        
+        */
 /*
         [Fact]
         public void GetEmploiDuTempByID_Returns200OK__WhenValidIDProvided()
@@ -328,6 +330,7 @@ namespace Tests
             Assert.IsType<NoContentResult>(result);
         }
 */
+/*
         [Fact]
         public void DeleteEmploiDuTemp_Returns_404NotFound_WhenNonExistentResourceIDSubmitted()
         {
@@ -341,5 +344,6 @@ namespace Tests
             //Assert
             Assert.IsType<NotFoundResult>(result);
         }
+        */
     }
 }

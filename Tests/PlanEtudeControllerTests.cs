@@ -255,6 +255,7 @@ namespace Tests
             Assert.IsType<NoContentResult>(result);
         }
 */
+/*
         [Fact]
         public void UpdateAdmin_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
         {
@@ -268,7 +269,8 @@ namespace Tests
             //Assert
             Assert.IsType<NotFoundResult>(result);
         }
-
+*/
+/*
         [Fact]
         public void PartialPlanEtudeUpdate_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
         {
@@ -285,6 +287,7 @@ namespace Tests
             //Assert
             Assert.IsType<NotFoundResult>(result);
         }
+        */
 /*
         [Fact]
         public void DeletePlanEtude_Returns204NoContent_WhenValidResourceIDSubmitted()
@@ -309,6 +312,7 @@ namespace Tests
             Assert.IsType<NoContentResult>(result);
         }
 */
+/*
         [Fact]
         public void DeletePlanEtude_Returns_404NotFound_WhenNonExistentResourceIDSubmitted()
         {
@@ -322,5 +326,6 @@ namespace Tests
             //Assert
             Assert.IsType<NotFoundResult>(result);
         }
+        */
     }
 }
