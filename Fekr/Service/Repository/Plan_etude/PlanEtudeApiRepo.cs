@@ -23,6 +23,7 @@ namespace Service.Repository.Plan_etude
                 throw new ArgumentNullException(nameof(planEtude));
             }
 
+            var etudiantsByClasse = _context.EspEtudiant.Where(e => e.CodeCl == planEtude.CodeCl).ToList();
             _context.EspModulePanierClasseSaiso.Add(planEtude);
         }
 
@@ -36,15 +37,83 @@ namespace Service.Repository.Plan_etude
             _context.EspModulePanierClasseSaiso.Remove(planEtude);
         }
 
+        public int GetNumberOfClasses(string annee)
+        {
+            var query = _context.EspModulePanierClasseSaiso
+                .Where(a => a.AnneeDeb == annee)
+                .Select(p => p.CodeCl).Distinct().ToArray().Length;
+            return query;
+        }
+
+        public int GetNumberOfModulesOfClassByYear(string classe, string annee)
+        {
+            var query = _context.EspModulePanierClasseSaiso
+                .Where(p => p.AnneeDeb == annee && p.CodeCl == classe)
+                .Select(a => a.CodeModule).ToArray().Length;
+
+            return query;
+        }
+
+        public string[] GetModulesByClasseAndYear(string classe, string annee)
+        {
+            var query = _context.EspModulePanierClasseSaiso
+                .Where(a => a.AnneeDeb == annee && a.CodeCl == classe)
+                .Select(m=>m.CodeModule)
+                .ToArray();
+
+            return query;
+        }
+
+        public string[] GetListOfAllClassesByYear(string annee)
+        {
+            var query = _context.EspModulePanierClasseSaiso
+                .Where(a => a.AnneeDeb == annee)
+                .Select(p => p.CodeCl).ToArray();
+
+            return query;
+        }
+
+        public string[] GetListOfEnseignantByModule(string annee, string module)
+        {
+            var query = _context.EspModulePanierClasseSaiso
+                .Where(a => a.AnneeDeb == annee && a.CodeModule == module && a.IdEns != null)
+                .Select(p => p.IdEns).Distinct().ToArray();
+
+            return query;
+        }
+
+        public decimal GetNbHeureParModuleParClasse(string annee, string module, string classe)
+        {
+            try
+            {
+                var query = _context.EspModulePanierClasseSaiso
+                    .Where(q => q.AnneeDeb == annee && q.CodeCl == classe && q.CodeModule == module)
+                    .Select(a => a.NbHeures).FirstOrDefault().Value;
+
+                return query;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return 0;
+            }
+        }
+
         public IEnumerable<EspModulePanierClasseSaiso> GetAllPlanEtude()
         {
             return _context.EspModulePanierClasseSaiso.ToList();
         }
 
-        public EspModulePanierClasseSaiso GetPlanEtudeById(string codeClasse)
+        public EspModulePanierClasseSaiso GetPlanEtudeById
+            (string codeClasse, string codeModule, string annee, decimal numSemestre)
         {
             //return _context.EspModulePanierClasseSaiso.FirstOrDefault(p => p.CodeModule == planEtude);
-            return _context.EspModulePanierClasseSaiso.Find(codeClasse);
+            return _context.EspModulePanierClasseSaiso.FirstOrDefault(p =>
+                p.CodeModule == codeModule &&
+                p.CodeCl == codeClasse &&
+                p.AnneeDeb == annee &&
+                p.NumSemestre == numSemestre
+            );
         }
 
         public IEnumerable<EspModulePanierClasseSaiso> GetAllPlanEtudeByClasse(string classe)
@@ -56,12 +125,15 @@ namespace Service.Repository.Plan_etude
         {
             return _context.EspModulePanierClasseSaiso.Where(p => p.CodeCl == classe && p.AnneeDeb == annee).ToList();
         }
-        public IEnumerable<EspModulePanierClasseSaiso> GetAllPlanEtudeByClasseAndAnneeAndSemestre(string classe, string annee, decimal semestre)
+
+        public IEnumerable<EspModulePanierClasseSaiso> GetAllPlanEtudeByClasseAndAnneeAndSemestre(string classe,
+            string annee, decimal semestre)
         {
-            return _context.EspModulePanierClasseSaiso.Where(p => 
-                p.CodeCl == classe && p.AnneeDeb == annee && p.NumSemestre == semestre)
+            return _context.EspModulePanierClasseSaiso.Where(p =>
+                    p.CodeCl == classe && p.AnneeDeb == annee && p.NumSemestre == semestre)
                 .ToList();
         }
+
         public IEnumerable<EspModulePanierClasseSaiso> GetAllPlanEtudeByModule(string codeModule)
         {
             return _context.EspModulePanierClasseSaiso.Where(p => p.CodeModule == codeModule);

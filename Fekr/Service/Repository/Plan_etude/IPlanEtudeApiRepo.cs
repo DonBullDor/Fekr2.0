@@ -11,7 +11,8 @@ namespace Service.Repository.Plan_etude
         bool SaveChanges();
         IEnumerable<EspModulePanierClasseSaiso> GetAllPlanEtude();
 
-        EspModulePanierClasseSaiso GetPlanEtudeById(string classe);
+        EspModulePanierClasseSaiso GetPlanEtudeById
+        (string classe, string codeModule, string annee, decimal numSemestre);
         IEnumerable<EspModulePanierClasseSaiso> GetAllPlanEtudeByClasse(string classe);
 
         IEnumerable<EspModulePanierClasseSaiso>
@@ -45,5 +46,12 @@ namespace Service.Repository.Plan_etude
         void UpdatePlanEtude(EspModulePanierClasseSaiso planEtude);
         void CreatePlanEtude(EspModulePanierClasseSaiso planEtude);
         void DeletePlanEtude(EspModulePanierClasseSaiso planEtude);
+
+        int GetNumberOfClasses(string annee);
+        int GetNumberOfModulesOfClassByYear(string classe, string annee);
+        string[] GetModulesByClasseAndYear(string classe, string annee);
+        string[] GetListOfAllClassesByYear(string annee);
+        string[] GetListOfEnseignantByModule(string annee, string module);
+        decimal GetNbHeureParModuleParClasse(string annee, string module, string classe);
     }
 }

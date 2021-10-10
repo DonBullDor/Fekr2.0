@@ -42,6 +42,16 @@ namespace Service.Repository.Notes
             return _context.ANote.FirstOrDefault(p => p.IdEt == idEtudiant);
         }
 
+        public IEnumerable<ANote> GetNotesByClasseAndEnseignantAndAnneDebAndNumSemestre
+        (string classe, string enseignant, string anneeDeb, decimal numSemestre)
+        {
+            return _context.ANote.Where(p =>
+                p.CodeCl == classe &&
+                p.IdEns == enseignant &&
+                p.AnneeDeb == anneeDeb &&
+                p.Semestre == numSemestre).ToList();
+        }
+
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
@@ -50,5 +60,7 @@ namespace Service.Repository.Notes
         public void UpdateNotes(ANote idEtudiant)
         {
         }
+        
+        
     }
 }

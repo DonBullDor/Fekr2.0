@@ -16,4 +16,5 @@
     &lt;TestId&gt;xUnit::029F59DA-3274-4110-9CB9-9A0B6D60D0E8::net5.0::Tests.AdminControllerTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::029F59DA-3274-4110-9CB9-9A0B6D60D0E8::net5.0::Tests.EmploiDuTempControllerTests.GetAllEmploi_ReturnsOneItem_WhenDBHasOneResource&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+&lt;/SessionState&gt;</s:String>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Heure/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

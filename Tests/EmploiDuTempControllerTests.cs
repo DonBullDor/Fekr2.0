@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using AutoMapper;
@@ -61,7 +62,7 @@ namespace Tests
             Assert.IsType<OkObjectResult>(result.Result);
         }
 
-        private List<EspEmploi> GetEmploiDuTemps(int num)
+        private static IEnumerable<EspEmploi> GetEmploiDuTemps(int num)
         {
             var commands = new List<EspEmploi>();
             if (num > 0)
@@ -81,7 +82,7 @@ namespace Tests
 
             return commands;
         }
-/*
+
         [Fact]
         public void GetAllEmploi_ReturnsOneItem_WhenDBHasOneResource()
         {
@@ -96,10 +97,9 @@ namespace Tests
 
             //Assert
             var okResult = result.Result as OkObjectResult;
-            var commands = okResult.Value as List<EmploiDuTempReadDto>;
-            Assert.Single(commands);
+            if (okResult?.Value is List<EmploiDuTempReadDto> commands) Assert.Single((IEnumerable) commands);
         }
-*/
+
         [Fact]
         public void GetAllEmploiDuTemps_Returns200OK_WhenDBHasOneResource()
         {
@@ -115,7 +115,7 @@ namespace Tests
             //Assert
             Assert.IsType<OkObjectResult>(result.Result);
         }
-/*
+
         [Fact]
         public void GetAllEmploiDuTemps_ReturnsCorrectType_WhenDBHasOneResource()
         {
@@ -127,11 +127,11 @@ namespace Tests
 
             //Act
             var result = controller.GetAll(); //Assert
-            Assert.IsType<ActionResult<IEnumerable<EmploiDuTempReadDto>>>(result);
+            Assert.IsType<ActionResult<IEnumerable<EspEmploi>>>(result);
         }
-*/
+
         //flag
-/*
+
         [Fact]
         public void GetEmploiDuTempByID_Returns404NotFound_WhenNonExistentIDProvided()
         {
@@ -145,7 +145,7 @@ namespace Tests
             //Assert
             Assert.IsType<NotFoundResult>(result.Result);
         }
-        */
+        
 /*
         [Fact]
         public void GetEmploiDuTempByID_Returns200OK__WhenValidIDProvided()

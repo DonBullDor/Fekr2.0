@@ -1,4 +1,5 @@
-﻿using Domain.Models;
+﻿using System;
+using Domain.Models;
 using System.Collections.Generic;
 
 namespace Service.Repository.Notes
@@ -9,6 +10,9 @@ namespace Service.Repository.Notes
         IEnumerable<ANote> GetAllNotes();
 
         ANote GetNotesById(string idEtudiant);
+        
+        IEnumerable<ANote> GetNotesByClasseAndEnseignantAndAnneDebAndNumSemestre(
+            string classe, string enseignant, string anneeDeb, decimal numSemestre);
 
         void UpdateNotes(ANote idEtudiant);
 

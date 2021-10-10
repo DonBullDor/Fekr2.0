@@ -14,7 +14,7 @@ namespace Domain.Models
         public string AnneeDeb { get; set; }
         public string CodeModule { get; set; }
         public decimal? Orale { get; set; }
-        public byte Semestre { get; set; }
+        public decimal Semestre { get; set; }
         public decimal? Dc1 { get; set; }
         public decimal? Dc2 { get; set; }
         public decimal? Ds { get; set; }

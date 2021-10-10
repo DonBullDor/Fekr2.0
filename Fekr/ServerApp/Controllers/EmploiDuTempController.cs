@@ -39,11 +39,11 @@ namespace ServerApp.Controllers
             _logger = log;
         }
 
-        public EmploiDuTempController(IEmploiDuTempRepo mockRepoObject, IMapper mapper)
-        {
-            _repository = mockRepoObject;
-            _mapper = mapper;
-        }
+        // public EmploiDuTempController(IEmploiDuTempRepo mockRepoObject, IMapper mapper)
+        // {
+        //     _repository = mockRepoObject;
+        //     _mapper = mapper;
+        // }
 
         [HttpGet]
         public ActionResult<IEnumerable<EspEmploi>> GetAll()
@@ -228,7 +228,7 @@ namespace ServerApp.Controllers
             _repository.SaveChanges();
             var planEtudeReadDto = _mapper.Map<PlanEtudeReadDto>(emploiDuTempModel);
             return CreatedAtRoute(nameof(GetEmploiDuTempByCodeModule),
-                new { Id = planEtudeReadDto.CodeModule }, planEtudeReadDto);
+                new { Id = planEtudeReadDto.CodeModule}, planEtudeReadDto);
         }
         
         [HttpPut("{id}")]
@@ -277,15 +277,7 @@ namespace ServerApp.Controllers
             _repository.SaveChanges();
             return NoContent();
         }
-        //[Route("[action]/{codeModule}", Name = "GetEmploiDuTempByCodeModule")]
-        
-        /**
-         * chargeHoraire: Dict<string, decimal> : string = code module, decimal = nb heure par semaine
-         * jours: les jours de la semaine jusqu'à le jour j
-         * emploi: l'emploi avec les modules inserée, vide au debut
-         * moduleToInsert: le module qu'on va inserer
-         * returns: nombre d'heure restant pour le module qu'on va inserer
-         */
+                
         private static decimal HoursLeft(
             Dictionary<string, decimal> chargeHoraire, 
             String[] jours, 
@@ -307,20 +299,18 @@ namespace ServerApp.Controllers
             return chargeHoraire[moduleToInsert] - sumHours;
         }
         
-        // TODO liste des jours feriers + d'autres contraintes (e.g.: math doit etre separe par un jours)
         [HttpGet]
         [Route("[action]/{codeClasse}/{annee}/{semestre:decimal}")]
         public ActionResult GenerateEmploiDuTemp(string codeClasse, string annee, decimal semestre)
         {
-            // Charge Horaire Init : string = code Module, decimal = nombre d'heure par semaine
             var chargeHoraire = new Dictionary<string, decimal>();
-            var plan = 
+            var planFromRepo = 
                 _repoPlan.GetAllPlanEtudeByClasseAndAnneeAndSemestre(codeClasse, annee, semestre);
 
-            var espModulePanierClasseSaisos = plan.ToList();
-            if (!espModulePanierClasseSaisos.Any()) return BadRequest("Check your values");
+            var planEtude = planFromRepo.ToList();
+            if (!planEtude.Any()) return BadRequest("Check your values");
             
-            foreach (var item in espModulePanierClasseSaisos)
+            foreach (var item in planEtude)
             {
                 if (item.NbHeures != null)
                 {
@@ -342,9 +332,9 @@ namespace ServerApp.Controllers
             {
                 {"lundi", new List<string>(9)},
                 {"mardi", new List<string>(9)},
-                {"mercredi", new List<string>(9)},
+                {"mercredi", new List<string>(5)},
                 {"jeudi", new List<string>(9)},
-                {"vendredi", new List<string>(9)},
+                {"vendredi", new List<string>(5)},
                 {"samedi", new List<string>(5)}
             };
 
@@ -355,7 +345,11 @@ namespace ServerApp.Controllers
             {
                 previousDates.Add(jour);
                 List<string> horaires = emploi[jour];
-                for (var i = 0; i < 7; i++)
+                var hourLimit = 7;
+                if(jour is "mercredi" or "vendredi" or "samedi"){
+                    hourLimit = 3;
+                }
+                for (var i = 0; i < hourLimit; i++)
                 {
                     bool inserted = false;
                     while (!inserted)

@@ -113,5 +113,18 @@ namespace ServerApp.Controllers
             _repository.SaveChanges();
             return NoContent();
         }
+
+        [Route("[action]/{classe}/{enseignant}/{anneeDeb}/{numSemestre:decimal}")]
+        [HttpGet]
+        public ActionResult<IEnumerable<NoteReadDto>> GetNotesByClasseAndEnseignantAndAnneDebAndNumSemestre(
+            string classe,
+            string enseignant,
+            string anneeDeb,
+            decimal numSemestre)
+        {
+            var notes = _repository.GetNotesByClasseAndEnseignantAndAnneDebAndNumSemestre(
+                classe, enseignant, anneeDeb, numSemestre);
+            return Ok(_mapper.Map<IEnumerable<NoteReadDto>>(notes));
+        }
     }
 }
