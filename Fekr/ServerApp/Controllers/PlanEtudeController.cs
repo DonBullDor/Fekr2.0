@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Data.PlanEtude;
 using Domain.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Service.Repository.Modules;
 using Service.Repository.Plan_etude;
 
 namespace ServerApp.Controllers
@@ -15,12 +17,14 @@ namespace ServerApp.Controllers
     public class PlanEtudeController : ControllerBase
     {
         private readonly IPlanEtudeApiRepo _repository;
+        private readonly IModuleApiRepo _repoModule;
 
         private readonly IMapper _mapper;
 
-        public PlanEtudeController(IPlanEtudeApiRepo repository, IMapper mapper)
+        public PlanEtudeController(IPlanEtudeApiRepo repository, IMapper mapper, IModuleApiRepo repoModule)
         {
             _repository = repository;
+            _repoModule = repoModule;
             _mapper = mapper;
         }
 
@@ -307,15 +311,43 @@ namespace ServerApp.Controllers
         {
             var planEtudeModel =
                 _mapper.Map<EspModulePanierClasseSaiso>(planEtudeCreateDto);
+            var module = _repoModule.GetModule(planEtudeCreateDto.CodeModule);
+            planEtudeModel.CodeModuleNavigation = module;
             _repository.CreatePlanEtude(planEtudeModel);
-            _repository.SaveChanges();
+            // _repository.SaveChanges();
             var planEtudeReadDto =
                 _mapper.Map<PlanEtudeReadDto>(planEtudeModel);
+            /*
             return CreatedAtRoute(nameof(GetPlanEtude),
-                new {Id = planEtudeReadDto.CodeModule},
+                new
+                {
+                    codeModule = planEtudeReadDto.CodeModule, 
+                    codeCl = planEtudeModel.CodeCl,
+                    anneeDeb = planEtudeModel.AnneeDeb,
+                    idEns = planEtudeModel.IdEns,
+                    numSemestre = planEtudeModel.NumSemestre,
+                    nbHeures = planEtudeModel.NbHeures
+                }, 
                 planEtudeReadDto);
+                */
+            return Ok(planEtudeReadDto);
         }
+        
+        [Route("[action]/")]
+        [HttpPost]
+        public ActionResult<PlanEtudeReadDto> CreateAllPlanEtude([FromBody] List<PlanEtudeCreateDto> planEtudeCreateDto)
+        {
+            var planEtudeModel =
+                    _mapper.Map<List<EspModulePanierClasseSaiso>>(planEtudeCreateDto);
+            foreach (var d in planEtudeModel)
+            {
+                _repository.CreatePlanEtude(d);
+            }
+            _repository.SaveChanges();
 
+            return Ok();
+        }
+        
         [HttpPut("{module}/{classe}/{annee}/{numSemestre:decimal}")]
         public ActionResult
             UpdatePlanEtude(

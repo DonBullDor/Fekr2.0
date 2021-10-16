@@ -9,6 +9,6 @@ namespace Data.PlanEtude
         public string AnneeDeb { get; set; }
         public string IdEns { get; set; }
         public decimal NumSemestre { get; set; }
-        public decimal? Nbheuradd { get; set; }
+        public decimal? NbHeures { get; set; }
     }
 }

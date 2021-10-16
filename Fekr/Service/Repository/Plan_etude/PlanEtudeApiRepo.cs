@@ -23,7 +23,6 @@ namespace Service.Repository.Plan_etude
                 throw new ArgumentNullException(nameof(planEtude));
             }
 
-            var etudiantsByClasse = _context.EspEtudiant.Where(e => e.CodeCl == planEtude.CodeCl).ToList();
             _context.EspModulePanierClasseSaiso.Add(planEtude);
         }
 
@@ -88,9 +87,9 @@ namespace Service.Repository.Plan_etude
             {
                 var query = _context.EspModulePanierClasseSaiso
                     .Where(q => q.AnneeDeb == annee && q.CodeCl == classe && q.CodeModule == module)
-                    .Select(a => a.NbHeures).FirstOrDefault().Value;
+                    .Select(a => a.NbHeures).FirstOrDefault();
 
-                return query;
+                return query != null ? query.Value : 0;
             }
             catch (Exception e)
             {

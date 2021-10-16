@@ -36,7 +36,7 @@ namespace Tests
             _configuration = null;
             _realProfile = null;
         }
-        
+        /*
         [Fact]
         public void GetPlanEtudes_ReturnsZeroPlanEtude_WhenDBIsEmpty()
         {
@@ -57,7 +57,7 @@ namespace Tests
             //Assert
             Assert.IsType<OkObjectResult>(result.Result);
         }
-
+        */
         private static IEnumerable<EspModulePanierClasseSaiso> GetPlanEtudes(int num)
         {
             var plans = new List<EspModulePanierClasseSaiso>();
@@ -75,7 +75,7 @@ namespace Tests
             }
             return plans;
         }
-
+        /*
         [Fact]
         public void GetAllPlanEtudes_ReturnsOneItem_WhenDBHasOneResource()
         {
