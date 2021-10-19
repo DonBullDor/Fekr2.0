@@ -14,6 +14,8 @@ namespace Service.Repository.Notes
         IEnumerable<ANote> GetNotesByClasseAndEnseignantAndAnneDebAndNumSemestre(
             string classe, string enseignant, string anneeDeb, decimal numSemestre);
 
+        IEnumerable<ANote> RechercheNotes(string[] critere);
+
         void UpdateNotes(ANote idEtudiant);
 
         void CreateNotes(ANote idEtudiant);

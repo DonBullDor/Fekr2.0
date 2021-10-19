@@ -51,7 +51,7 @@ namespace ServerApp.Controllers
             _repository.SaveChanges();
             var moduleReadDto = _mapper.Map<NoteReadDto>(moduleModel);
             return CreatedAtRoute(nameof(GetNotesById),
-            new { Id = moduleReadDto.IdEt }, moduleReadDto);
+                new {Id = moduleReadDto.IdEt}, moduleReadDto);
         }
 
         [HttpPut("{id}")]
@@ -62,6 +62,7 @@ namespace ServerApp.Controllers
             {
                 return NotFound();
             }
+
             _mapper.Map(moduleUpdateDto, moduleModelFromRepo);
             _repository.UpdateNotes(moduleModelFromRepo);
             _repository.SaveChanges();
@@ -76,12 +77,14 @@ namespace ServerApp.Controllers
             {
                 return NotFound();
             }
+
             var moduleToPatch = _mapper.Map<NoteUpdateDto>(moduleModelFromRepo);
             patchDoc.ApplyTo(moduleToPatch, ModelState);
             if (!TryValidateModel(moduleToPatch))
             {
                 return ValidationProblem(ModelState);
             }
+
             _mapper.Map(moduleToPatch, moduleModelFromRepo);
             _repository.UpdateNotes(moduleModelFromRepo);
             _repository.SaveChanges();
@@ -100,7 +103,7 @@ namespace ServerApp.Controllers
             _repository.SaveChanges();
             return NoContent();
         }
-        
+
         [HttpDelete("{id}")]
         public ActionResult DeleteNotes(string id)
         {
@@ -109,6 +112,7 @@ namespace ServerApp.Controllers
             {
                 return NotFound();
             }
+
             _repository.DeleteNotes(moduleModelFromRepo);
             _repository.SaveChanges();
             return NoContent();
@@ -124,6 +128,14 @@ namespace ServerApp.Controllers
         {
             var notes = _repository.GetNotesByClasseAndEnseignantAndAnneDebAndNumSemestre(
                 classe, enseignant, anneeDeb, numSemestre);
+            return Ok(_mapper.Map<IEnumerable<NoteReadDto>>(notes));
+        }
+
+        [Route("[action]/")]
+        [HttpPost]
+        public ActionResult<IEnumerable<NoteReadDto>> Recherche([FromBody] Criteria criteria)
+        {
+            var notes = _repository.RechercheNotes(criteria.listcriteria);
             return Ok(_mapper.Map<IEnumerable<NoteReadDto>>(notes));
         }
     }

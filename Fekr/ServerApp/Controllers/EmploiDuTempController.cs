@@ -376,7 +376,14 @@ namespace ServerApp.Controllers
                 }
             }
             return Ok(emploi);
-
+        }
+        
+        [Route("[action]/")]
+        [HttpPost]
+        public ActionResult<IEnumerable<EmploiDuTempReadDto>> Recherche([FromBody] Criteria criteria)
+        {
+            var emplois = _repository.Recherche(criteria.listcriteria);
+            return Ok(_mapper.Map<IEnumerable<EmploiDuTempReadDto>>(emplois));
         }
     }
 }

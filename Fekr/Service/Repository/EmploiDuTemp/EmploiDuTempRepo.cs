@@ -187,5 +187,33 @@ namespace Service.Repository.EmploiDuTemp
 
             _context.EspEmploi.Remove(emploi);
         }
+
+        public IEnumerable<EspEmploi> Recherche(string[] criteria)
+        {
+            IEnumerable<EspEmploi> emplois = new List<EspEmploi>();
+            try
+            {
+                
+                emplois = _context.EspEmploi.FromSqlRaw(
+                    $"Select * from ESP_EMPLOI ").ToList();
+                if (criteria[0] != "" && criteria[0] != null)
+                    emplois = emplois.Where(a=>a.CodeModule == criteria[0]);
+                
+                if (criteria[1] != "" && criteria[1] != null)
+                    emplois = emplois.Where(a=>a.AnneeDeb == criteria[1]);
+
+                if (criteria[2] != "" && criteria[2] != null)
+                    emplois = emplois.Where(a=>a.Semestre == decimal.Parse(criteria[2]));
+
+                if (criteria[3] != "" && criteria[3] != null)
+                    emplois = emplois.Where(a=>a.CodeCl == criteria[3]);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return emplois;
+        }
     }
 }

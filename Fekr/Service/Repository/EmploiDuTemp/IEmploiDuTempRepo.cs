@@ -43,5 +43,7 @@ namespace Service.Repository.EmploiDuTemp
         void CreateEmploiDuTemp(EspEmploi emploi);
 
         void DeleteEmploiDuTemp(EspEmploi emploi);
+        IEnumerable<EspEmploi> Recherche(string[] critere);
+
     }
 }
